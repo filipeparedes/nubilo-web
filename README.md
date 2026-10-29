@@ -1,36 +1,73 @@
-# nubilo-web
+# React + TypeScript + Vite
 
-The web frontend for [nubilo](https://github.com/filipeparedes/nubilo), a personal file storage server with versioning, built from scratch in C++. It lets you log in, browse your folders, upload and download files, and inspect and restore the history of each file, in an interface styled after an old text-mode terminal.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Status
+Currently, two official plugins are available:
 
-| Feature | Status |
-|---|---|
-| Project setup and API client | Planned |
-| Register, login and logout | Planned |
-| File browser: folders, upload, download, delete | Planned |
-| Version history: list, download, restore | Planned |
-| Version comparison | Planned |
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-The goal is for the interface to cover everything the server can do, so that all of it can be tried and tested from the browser.
+## React Compiler
 
-## Design
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-A retro terminal look instead of the usual cards and rounded containers: monospace type, small and dense text, square corners, 1px lines and box-drawing characters, a dark background with a single amber accent, and actions written as `[ upload ]`, `[ get ]`, `[ del ]`. Lists look like the output of `ls -l`, and the current folder is shown as a shell prompt.
+## Expanding the ESLint configuration
 
-## Stack
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-React, TypeScript and Vite, with React Router for the pages, TanStack Query for the requests to the API and plain CSS with custom properties for the styles.
+```js
+export default defineConfig([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      // Other configs...
 
-## Requirements
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-* Node.js
-* A running [nubilo server](https://github.com/filipeparedes/nubilo), which must allow this frontend's address through `server.corsOrigin` in its `config.json` (`http://localhost:5173` in development)
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
 
-## Related repositories
+You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
 
-| Repository | Role |
-|---|---|
-| [nubilo](https://github.com/filipeparedes/nubilo) | The server and its documentation: REST API, storage, versioning |
-| [nubilo-client](https://github.com/filipeparedes/nubilo-client) | A terminal-based desktop client |
-| `nubilo-web` | This repository: the web frontend |
+```js
+// eslint.config.js
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
+
+export default defineConfig([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs["recommended-typescript"],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
