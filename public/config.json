@@ -1,7 +1,6 @@
 {
   "config": {
-    "api": {
-      "url": "http://localhost:8080"
-    }
+    "api": { "url": "http://localhost:8080" },
+    "devServer": { "port": 5173 }
   }
 }
