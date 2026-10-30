@@ -102,7 +102,7 @@ describe("request", () => {
       jsonResponse(404, { error: { code: "NOT_FOUND", message: "no such file" } }),
     );
 
-    const error = await request("/files/9").catch((e) => e);
+    const error = (await request("/files/9").catch((e) => e)) as ApiError;
 
     expect(error).toBeInstanceOf(ApiError);
     expect(error.status).toBe(404);
@@ -118,7 +118,7 @@ describe("request", () => {
       }),
     );
 
-    const error = await request("/files").catch((e) => e);
+    const error = (await request("/files").catch((e) => e)) as ApiError;
 
     expect(error.code).toBe("UNKNOWN");
     expect(error.message).toBe("Bad Gateway");
