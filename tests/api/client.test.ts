@@ -99,7 +99,9 @@ describe("request", () => {
 
   it("throws an ApiError built from the backend error body", async () => {
     fetchMock.mockResolvedValue(
-      jsonResponse(404, { error: { code: "NOT_FOUND", message: "no such file" } }),
+      jsonResponse(404, {
+        error: { code: "NOT_FOUND", message: "no such file" },
+      }),
     );
 
     const error = (await request("/files/9").catch((e) => e)) as ApiError;
@@ -127,7 +129,9 @@ describe("request", () => {
   it("forgets the token on 401", async () => {
     setToken("expired");
     fetchMock.mockResolvedValue(
-      jsonResponse(401, { error: { code: "UNAUTHORIZED", message: "bad token" } }),
+      jsonResponse(401, {
+        error: { code: "UNAUTHORIZED", message: "bad token" },
+      }),
     );
 
     await request("/files").catch(() => {});

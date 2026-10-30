@@ -4,9 +4,9 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 
 ## Structure
 
-| File | Role |
-|---|---|
-| `config.ts` | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address. |
+| File        | Role                                                                                                                                              |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config.ts` | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                       |
 | `client.ts` | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, and `getToken()` / `setToken()` manage the session token. |
 
 ## How it works

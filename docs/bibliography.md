@@ -2,31 +2,31 @@
 
 ## Libraries
 
-* Meta. *React*. https://react.dev
-* Vite. *Vite*. https://vite.dev
-* Tailwind Labs. *Tailwind CSS*. https://tailwindcss.com
-* TanStack. *TanStack Query*. https://tanstack.com/query
-* Remix Software. *React Router*. https://reactrouter.com
-* Vitest. *Vitest*. https://vitest.dev
-* Prettier. *Prettier*. https://prettier.io
-* ESLint. *ESLint*. https://eslint.org
+- Meta. _React_. https://react.dev
+- Vite. _Vite_. https://vite.dev
+- Tailwind Labs. _Tailwind CSS_. https://tailwindcss.com
+- TanStack. _TanStack Query_. https://tanstack.com/query
+- Remix Software. _React Router_. https://reactrouter.com
+- Vitest. _Vitest_. https://vitest.dev
+- Prettier. _Prettier_. https://prettier.io
+- ESLint. _ESLint_. https://eslint.org
 
 ## Web platform
 
-* MDN Web Docs. *Fetch API*. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-* MDN Web Docs. *Using the Fetch API*. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-* MDN Web Docs. *Window: localStorage property*. https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-* MDN Web Docs. *Cross-Origin Resource Sharing (CORS)*. https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
+- MDN Web Docs. _Fetch API_. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+- MDN Web Docs. _Using the Fetch API_. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+- MDN Web Docs. _Window: localStorage property_. https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+- MDN Web Docs. _Cross-Origin Resource Sharing (CORS)_. https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
 
 ## Authentication
 
-* M. Jones, D. Hardt. *The OAuth 2.0 Authorization Framework: Bearer Token Usage*. RFC 6750. https://www.rfc-editor.org/rfc/rfc6750
+- M. Jones, D. Hardt. _The OAuth 2.0 Authorization Framework: Bearer Token Usage_. RFC 6750. https://www.rfc-editor.org/rfc/rfc6750
 
 ## Configuration
 
-* Vite. *Static Asset Handling: The public directory*. https://vite.dev/guide/assets#the-public-directory
-* Tailwind Labs. *Theme variables*. Tailwind CSS Docs. https://tailwindcss.com/docs/theme
+- Vite. _Static Asset Handling: The public directory_. https://vite.dev/guide/assets#the-public-directory
+- Tailwind Labs. _Theme variables_. Tailwind CSS Docs. https://tailwindcss.com/docs/theme
 
 ## Testing
 
-* J. Andrzejewski. *Testing Vue components with Vitest*. DEV Community. https://dev.to/jacobandrewsky/testing-vue-components-with-vitest-5c21
+- J. Andrzejewski. _Testing Vue components with Vitest_. DEV Community. https://dev.to/jacobandrewsky/testing-vue-components-with-vitest-5c21
