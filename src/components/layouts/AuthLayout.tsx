@@ -20,7 +20,7 @@ export function AuthLayout() {
     <main className="grid min-h-screen place-items-center bg-bg p-4">
       <section className="w-full max-w-[440px] border border-line bg-panel p-6 md:p-8">
         <div className="flex justify-center">
-          <Wordmark size="lg" cursor={false}/>
+          <Wordmark size="lg" cursor={false} />
         </div>
         <p className="text-center text-muted">SELF-HOSTED OBJECT STORAGE</p>
 
