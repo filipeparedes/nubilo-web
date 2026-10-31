@@ -4,6 +4,7 @@ import { Field } from "../components/Field";
 import { Modal } from "../components/Modal";
 import { RuleTitle } from "../components/RuleTitle";
 import { StatusLine } from "../components/Statusline";
+import { Wordmark } from "../components/Wordmark";
 
 // Development-only sandbox: put components here to see how they look.
 export default function ComponentsPage() {
@@ -29,6 +30,10 @@ export default function ComponentsPage() {
       )}
 
       <StatusLine tone="success">file uploaded</StatusLine>
+
+      <Wordmark size="md"/>
+      <Wordmark size="lg"/>
+      <Wordmark size="lg" cursor={false} />
     </main>
   );
 }
