@@ -9,6 +9,7 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
   cursor?: boolean;
   // Draw the border in the error color.
   invalid?: boolean;
+}
 
 // A terminal input. Every other prop (type, value, onChange, autoFocus,
 // placeholder...) goes straight to the <input>.
