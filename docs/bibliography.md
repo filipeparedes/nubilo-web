@@ -22,6 +22,10 @@
 
 - M. Jones, D. Hardt. _The OAuth 2.0 Authorization Framework: Bearer Token Usage_. RFC 6750. https://www.rfc-editor.org/rfc/rfc6750
 
+## React
+
+- Meta. _Passing Data Deeply with Context_. React. https://react.dev/learn/passing-data-deeply-with-context
+
 ## Configuration
 
 - Vite. _Static Asset Handling: The public directory_. https://vite.dev/guide/assets#the-public-directory
