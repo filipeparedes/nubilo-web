@@ -23,9 +23,13 @@ export function Field({
 }: FieldProps) {
   return (
     <label className={`mb-4 block ${className}`}>
-      {label && <span className="mb-1 block text-accent-dim">{label}</span>}
+      {label && (
+        <span className="mb-1 block text-[10px] uppercase tracking-[.1em] text-accent-dim">
+          {label}
+        </span>
+      )}
       <span
-        className={`flex items-center gap-2 border px-2 py-1 ${invalid ? "border-error" : "border-line focus-within:border-accent"}`}
+        className={`flex h-[34px] items-center gap-2 border bg-panel px-2 ${invalid ? "border-error" : "border-line focus-within:border-accent"}`}
       >
         {prompt && (
           <span className="text-accent" aria-hidden="true">
@@ -33,13 +37,13 @@ export function Field({
           </span>
         )}
         <input
-          className="min-w-0 flex-1 bg-transparent text-fg outline-none placeholder:text-accent-dim"
+          className="min-w-0 flex-1 border-0 bg-transparent text-fg outline-0"
           aria-invalid={invalid}
           {...props}
         />
         {cursor && (
           <span
-            className="h-[1em] w-[0.6em] animate-pulse bg-accent"
+            className="inline-block h-3.5 w-[7px] animate-blink bg-accent motion-reduce:animate-none"
             aria-hidden="true"
           />
         )}

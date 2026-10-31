@@ -10,7 +10,7 @@ const TONES: Record<Tone, string> = {
 
 const PREFIXES: Record<Tone, string> = {
   error: "!",
-  success: "OK",
+  success: "✓",
   muted: "-",
 };
 

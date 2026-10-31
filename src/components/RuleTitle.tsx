@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
-type Tone = "accent" | "muted";
+type Tone = "dim" | "accent";
 
 const TONES: Record<Tone, string> = {
+  dim: "text-accent-dim",
   accent: "text-accent",
-  muted: "text-accent-dim",
 };
 
 interface RuleTitleProps {
@@ -20,15 +20,15 @@ export function RuleTitle({
   title,
   right,
   uppercase = true,
-  tone = "accent",
+  tone = "dim",
 }: RuleTitleProps) {
   return (
-    <div className={`flex items-center gap-2 ${TONES[tone]}`}>
-      <span className="whitespace-nowrap">
-        ┤ {uppercase ? title.toUpperCase() : title} ├
-      </span>
+    <div
+      className={`flex min-w-0 items-center gap-2 overflow-hidden whitespace-nowrap text-[10px] font-semibold tracking-[.12em] ${TONES[tone]}`}
+    >
+      <span>┤ {uppercase ? title.toUpperCase() : title} ├</span>
       <span
-        className="min-w-0 flex-1 overflow-hidden whitespace-nowrap text-line"
+        className="flex-1 overflow-hidden tracking-normal text-line"
         aria-hidden="true"
       >
         {"─".repeat(200)}

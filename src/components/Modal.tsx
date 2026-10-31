@@ -6,7 +6,7 @@ type Size = "sm" | "md" | "lg";
 
 const SIZES: Record<Size, string> = {
   sm: "max-w-sm",
-  md: "max-w-lg",
+  md: "max-w-[520px]",
   lg: "max-w-3xl",
 };
 
@@ -15,7 +15,7 @@ interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   size?: Size;
-  // Buttons or text at the bottom, such as the confirm and cancel actions.
+  // Buttons at the bottom of the content, such as confirm and cancel.
   footer?: ReactNode;
   // Close when the dimmed background is clicked.
   closeOnBackdrop?: boolean;
@@ -45,34 +45,42 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-bg/80 p-4"
+      className="fixed inset-0 z-20 grid place-items-center bg-black/[.78] p-4"
       role="presentation"
       onClick={closeOnBackdrop ? onClose : undefined}
     >
       <section
-        className={`w-full border border-line bg-bg ${SIZES[size]}`}
+        className={`w-full border border-accent bg-bg ${SIZES[size]}`}
         role="dialog"
         aria-modal="true"
         aria-label={title}
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex items-center justify-between gap-2 px-3 py-2 text-accent">
-          <span className="min-w-0 overflow-hidden whitespace-nowrap">
-            ┌─ {title.toUpperCase()} {"─".repeat(40)}
+        <div className="flex items-center justify-between gap-2 bg-panel-alt px-3 py-2 text-accent">
+          <span className="min-w-0 flex-1 overflow-hidden whitespace-nowrap">
+            ┌─ {title.toUpperCase()} {"─".repeat(100)}
           </span>
           <Button onClick={onClose} aria-label="Close">
             x
           </Button>
         </div>
-        <div className="p-4">{children}</div>
-        {footer && (
-          <div className="flex justify-end gap-3 px-4 pb-4">{footer}</div>
-        )}
+        <div className="p-6">
+          {children}
+          {footer && (
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              {footer}
+            </div>
+          )}
+        </div>
         <div
-          className="overflow-hidden whitespace-nowrap px-3 py-1 text-line"
+          className="flex items-center bg-panel-alt px-3 py-2 text-accent"
           aria-hidden="true"
         >
-          └{"─".repeat(60)}┘
+          <span>└</span>
+          <span className="min-w-0 flex-1 overflow-hidden whitespace-nowrap">
+            {"─".repeat(100)}
+          </span>
+          <span>┘</span>
         </div>
       </section>
     </div>

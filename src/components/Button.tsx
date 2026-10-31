@@ -3,16 +3,22 @@ import type { ButtonHTMLAttributes } from "react";
 type Tone = "normal" | "danger" | "success" | "muted";
 type Size = "sm" | "md";
 
+// On hover and keyboard focus the colors invert (text on a colored
+// background). A disabled button does not react.
 const TONES: Record<Tone, string> = {
-  normal: "text-accent hover:bg-accent hover:text-bg",
-  danger: "text-error hover:bg-error hover:text-bg",
-  success: "text-ok hover:bg-ok hover:text-bg",
-  muted: "text-accent-dim hover:bg-accent-dim hover:text-bg",
+  normal:
+    "text-accent enabled:hover:bg-accent enabled:hover:text-bg enabled:focus-visible:bg-accent enabled:focus-visible:text-bg",
+  danger:
+    "text-error enabled:hover:bg-error enabled:hover:text-bg enabled:focus-visible:bg-error enabled:focus-visible:text-bg",
+  success:
+    "text-ok enabled:hover:bg-ok enabled:hover:text-bg enabled:focus-visible:bg-ok enabled:focus-visible:text-bg",
+  muted:
+    "text-muted enabled:hover:bg-muted enabled:hover:text-bg enabled:focus-visible:bg-muted enabled:focus-visible:text-bg",
 };
 
 const SIZES: Record<Size, string> = {
-  sm: "text-xs",
-  md: "text-[13px]",
+  sm: "text-[10px]",
+  md: "",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,7 +45,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`cursor-pointer whitespace-pre disabled:cursor-not-allowed disabled:opacity-50 ${TONES[tone]} ${SIZES[size]} ${fullWidth ? "w-full" : ""} ${className}`}
+      className={`cursor-pointer whitespace-nowrap py-0.5 font-medium focus-visible:outline-0 disabled:cursor-not-allowed disabled:text-muted disabled:opacity-50 ${TONES[tone]} ${SIZES[size]} ${fullWidth ? "w-full" : ""} ${className}`}
       {...props}
     >
       {brackets ? <>[ {children} ]</> : children}
