@@ -10,6 +10,7 @@ const SIZES: Record<Size, string> = {
   lg: "max-w-3xl",
 };
 
+interface ModalProps {
   title: string;
   onClose: () => void;
   children: ReactNode;
