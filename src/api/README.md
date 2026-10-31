@@ -4,10 +4,12 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 
 ## Structure
 
-| File        | Role                                                                                                                                              |
+| File        | Role                                                                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `config.ts` | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                       |
-| `client.ts` | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, and `getToken()` / `setToken()` manage the session token. |
+| `endpoints.ts` | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand. |
+| `auth.ts` | The authentication calls: `register`, `login` and `logout`. |
+| `client.ts` | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
 
 ## How it works
 
@@ -16,16 +18,16 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 **Requests.** `request<T>(path, options)` builds the URL from the configured address, adds `Authorization: Bearer <token>` when a token is stored, sends `body` as JSON and returns the parsed response (`undefined` for `204 No Content`). `query` values are added to the URL, and `undefined` ones are skipped.
 
 ```ts
-const versions = await request<Version[]>("/files/1/versions");
-const diff = await request<Diff>("/files/1/versions/compare", {
+const versions = await request<Version[]>(ENDPOINTS.versions(1));
+const diff = await request<Diff>(ENDPOINTS.compare(1), {
   query: { from: 1, to: 2 },
 });
-await request("/folders", { method: "POST", body: { path: "docs" } });
+await request(ENDPOINTS.folders, { method: "POST", body: { path: "docs" } });
 ```
 
 **Errors.** Any non-2xx response throws an `ApiError` with the HTTP `status`, the backend error `code` (`UNAUTHORIZED`, `NOT_FOUND`, `INVALID_REQUEST`, `INVALID_PATH`, `PATH_CONFLICT`) and the `message`. Screens decide what to do from the `code`, not by parsing text. If the body is not the expected JSON (a proxy error page, for example) the code is `UNKNOWN` and the message is the HTTP status text.
 
-**Session token.** The token is kept in `localStorage`, so a page refresh does not log the user out. On a `401` the client forgets the token and throws, and it is up to the auth context to send the user to the login page.
+**Session token.** The token is kept in `localStorage`, so a page refresh does not log the user out. On a `401` the client forgets the token, calls the handler registered with `setUnauthorizedHandler()` and throws. The auth provider registers that handler so the app state follows the token (see `src/auth/README.md`).
 
 ## Not covered yet
 

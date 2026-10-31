@@ -14,6 +14,14 @@ export function setToken(token: string | null): void {
   else localStorage.setItem(TOKEN_KEY, token);
 }
 
+// Called when the server rejects the session (401), so the app state can
+// follow the token that the client just forgot.
+let onUnauthorized: (() => void) | null = null;
+
+export function setUnauthorizedHandler(handler: (() => void) | null): void {
+  onUnauthorized = handler;
+}
+
 // Thrown for every non-2xx response. It mirrors the backend error body
 // {"error": {"code", "message"}}, so the UI can react to the code
 // (UNAUTHORIZED, NOT_FOUND, INVALID_REQUEST, INVALID_PATH, PATH_CONFLICT)
@@ -64,7 +72,10 @@ export async function request<T>(
     // The session is invalid or expired: forget the token. Sending the
     // user to the login page is the job of the auth context, not of
     // this layer.
-    if (res.status === 401) setToken(null);
+    if (res.status === 401) {
+      setToken(null);
+      onUnauthorized?.();
+    }
 
     // The body may not be JSON (a proxy error page, for example), so
     // fall back to the HTTP status text.
