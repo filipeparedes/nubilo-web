@@ -38,6 +38,6 @@ const { isAuthenticated, login, logout } = useAuth();
 
 `useAuth()` throws if it is used outside `AuthProvider`.
 
-## Not covered yet
+## Pages
 
-The login and register pages, the logout button and the app layout come in their own issues.
+The login and register pages are in `src/pages`, drawn inside `AuthLayout` (`src/components/layouts`), which holds the app name and the switch between the two. Both use `useAuth()`, show the error of the backend and send a logged-in user to the home page. Registering also starts the session. The logout button and the app layout come in their own issues.

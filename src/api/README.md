@@ -10,6 +10,7 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 | `endpoints.ts` | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand.                                                                                                                                      |
 | `auth.ts`      | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
 | `client.ts`    | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
+| `errorMessage.ts` | Turns a failed call into a message for the user (`CODE :: message`). |
 
 ## How it works
 
