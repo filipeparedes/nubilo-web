@@ -4,12 +4,12 @@ The session of the logged-in user: whether there is one, how it starts and ends,
 
 ## Structure
 
-| File | Role |
-|---|---|
-| `AuthContext.ts` | Defines what components can read about the session: `isAuthenticated`, `login()` and `logout()`. |
-| `AuthProvider.tsx` | Keeps the session and provides it to the whole app. Mounted once, in `main.tsx`. |
-| `useAuth.ts` | The hook components use to read the session. |
-| `RequireAuth.tsx` | A route guard: lets the wrapped routes through only when there is a session. |
+| File               | Role                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------ |
+| `AuthContext.ts`   | Defines what components can read about the session: `isAuthenticated`, `login()` and `logout()`. |
+| `AuthProvider.tsx` | Keeps the session and provides it to the whole app. Mounted once, in `main.tsx`.                 |
+| `useAuth.ts`       | The hook components use to read the session.                                                     |
+| `RequireAuth.tsx`  | A route guard: lets the wrapped routes through only when there is a session.                     |
 
 ## How it works
 
@@ -31,11 +31,13 @@ The session of the logged-in user: whether there is one, how it starts and ends,
 ```
 
 **Using the session in a component.**
+
 ```tsx
 const { isAuthenticated, login, logout } = useAuth();
 ```
+
 `useAuth()` throws if it is used outside `AuthProvider`.
 
-## Not covered yet
+## Pages
 
-The login and register pages, the logout button and the app layout come in their own issues.
+The login and register pages are in `src/pages`, drawn inside `AuthLayout` (`src/components/layouts`), which holds the app name and the switch between the two. Both use `useAuth()`, show the error of the backend and send a logged-in user to the home page. Registering also starts the session. The logout button and the app layout come in their own issues.
