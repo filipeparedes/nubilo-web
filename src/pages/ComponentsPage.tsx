@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Field } from "../components/Field";
 import { Modal } from "../components/Modal";
 import { RuleTitle } from "../components/RuleTitle";
-import { StatusLine } from "../components/Statusline";
+import { StatusLine } from "../components/StatusLine";
 import { Wordmark } from "../components/Wordmark";
 
 // Development-only sandbox: put components here to see how they look.
