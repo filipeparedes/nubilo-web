@@ -2,11 +2,15 @@ import { Route, Routes } from "react-router-dom";
 import { RequireAuth } from "./auth/RequireAuth";
 import ComponentsPage from "./pages/ComponentsPage";
 import { ROUTES } from "./routes";
+import { AuthLayout } from "./components/layouts/AuthLayout";
+import LoginPage from "./pages/LoginPage";
 
 export default function App() {
   return (
     <Routes>
-      <Route path={ROUTES.login} element={<p>login</p>} />
+      <Route element={<AuthLayout />}>
+        <Route path={ROUTES.login} element={<LoginPage />} />
+      </Route>
       <Route element={<RequireAuth />}>
         <Route path={ROUTES.home} element={<p>home</p>} />
       </Route>
