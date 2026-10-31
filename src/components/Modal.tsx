@@ -65,7 +65,9 @@ export function Modal({
           </Button>
         </div>
         <div className="p-4">{children}</div>
-        {footer && <div className="flex justify-end gap-3 px-4 pb-4">{footer}</div>}
+        {footer && (
+          <div className="flex justify-end gap-3 px-4 pb-4">{footer}</div>
+        )}
         <div
           className="overflow-hidden whitespace-nowrap px-3 py-1 text-line"
           aria-hidden="true"

@@ -4,12 +4,12 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 
 ## Structure
 
-| File        | Role                                                                     |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config.ts` | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                       |
-| `endpoints.ts` | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand. |
-| `auth.ts` | The authentication calls: `register`, `login` and `logout`. |
-| `client.ts` | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
+| File           | Role                                                                                                                                                                                                                        |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config.ts`    | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                                                                                                 |
+| `endpoints.ts` | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand.                                                                                                                                      |
+| `auth.ts`      | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
+| `client.ts`    | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
 
 ## How it works
 

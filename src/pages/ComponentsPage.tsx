@@ -31,8 +31,8 @@ export default function ComponentsPage() {
 
       <StatusLine tone="success">file uploaded</StatusLine>
 
-      <Wordmark size="md"/>
-      <Wordmark size="lg"/>
+      <Wordmark size="md" />
+      <Wordmark size="lg" />
       <Wordmark size="lg" cursor={false} />
     </main>
   );
