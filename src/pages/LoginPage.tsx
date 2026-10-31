@@ -7,14 +7,14 @@ import { Button } from "../components/Button";
 import { Field } from "../components/Field";
 import { StatusLine } from "../components/StatusLine";
 import { ROUTES } from "../routes";
+import { errorMessage } from "../api/errorMessage";
 
 // Turns a failed login into a message for the user.
-function errorMessage(error: unknown): string {
-  if (error instanceof ApiError) {
-    if (error.code === "UNAUTHORIZED") return "Invalid email or password.";
-    return `${error.code} :: ${error.message}`;
+function loginErrorMessage(error: unknown): string {
+  if (error instanceof ApiError && error.code === "UNAUTHORIZED") {
+    return "Invalid email or password.";
   }
-  return "Could not reach the server.";
+  return errorMessage(error);
 }
 
 export default function LoginPage() {
@@ -35,7 +35,7 @@ export default function LoginPage() {
     try {
       await login(email, password);
     } catch (e) {
-      setError(errorMessage(e));
+      setError(loginErrorMessage(e));
     } finally {
       setSubmitting(false);
     }
