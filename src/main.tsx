@@ -7,6 +7,7 @@ import "@fontsource/jetbrains-mono/700.css";
 import "./styles/global.css";
 import App from "./App.tsx";
 import { loadConfig } from "./api/config";
+import { AuthProvider } from "./auth/AuthProvider";
 
 const queryClient = new QueryClient();
 const root = createRoot(document.getElementById("root")!);
@@ -17,7 +18,9 @@ loadConfig()
       <StrictMode>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <App />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </BrowserRouter>
         </QueryClientProvider>
       </StrictMode>,
