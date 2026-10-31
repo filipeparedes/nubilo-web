@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ApiError, getToken, request, setToken, setUnauthorizedHandler } from "../../src/api/client";
+import {
+  ApiError,
+  getToken,
+  request,
+  setToken,
+  setUnauthorizedHandler,
+} from "../../src/api/client";
 
 // The client reads the API address from the loaded configuration.
 vi.mock("../../src/api/config", () => ({
@@ -143,14 +149,14 @@ describe("request", () => {
     const handler = vi.fn();
     setUnauthorizedHandler(handler);
     fetchMock.mockResolvedValue(
-        jsonResponse(401, {
+      jsonResponse(401, {
         error: { code: "UNAUTHORIZED", message: "bad token" },
-        }),
+      }),
     );
 
     await request("/files").catch(() => {});
 
     expect(handler).toHaveBeenCalledOnce();
     setUnauthorizedHandler(null);
-    });
+  });
 });

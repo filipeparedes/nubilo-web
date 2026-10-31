@@ -73,8 +73,8 @@ export async function request<T>(
     // user to the login page is the job of the auth context, not of
     // this layer.
     if (res.status === 401) {
-        setToken(null);
-        onUnauthorized?.();
+      setToken(null);
+      onUnauthorized?.();
     }
 
     // The body may not be JSON (a proxy error page, for example), so
