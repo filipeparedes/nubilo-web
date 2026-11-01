@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Navigate } from "react-router-dom";
-import { register } from "../api/auth";
+import { register } from "../api/resources/auth";
 import { errorMessage } from "../api/errorMessage";
 import { useAuth } from "../hooks/useAuth";
 import { Button } from "../components/Button";

@@ -1,5 +1,5 @@
-import { request } from "./client";
-import { ENDPOINTS } from "./endpoints";
+import { request } from "../client";
+import { ENDPOINTS } from "../endpoints";
 
 // Creates an account. Doesn't log the user in.
 export function register(email: string, password: string) {

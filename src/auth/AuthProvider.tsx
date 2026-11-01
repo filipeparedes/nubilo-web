@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
-import { login as loginRequest, logout as logoutRequest } from "../api/auth";
+import { login as loginRequest, logout as logoutRequest } from "../api/resources/auth";
 import { getToken, setToken, setUnauthorizedHandler } from "../api/client";
 import { AuthContext } from "./AuthContext";
 
