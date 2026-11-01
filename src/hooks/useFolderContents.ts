@@ -8,8 +8,6 @@ export function useFolderContents(folderId?: number) {
   return useQuery({
     queryKey: ["folder", folderId ?? "root"],
     queryFn: () =>
-      folderId === undefined
-        ? getRootContents()
-        : getFolderContents(folderId),
+      folderId === undefined ? getRootContents() : getFolderContents(folderId),
   });
 }
