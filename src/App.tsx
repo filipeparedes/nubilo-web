@@ -6,6 +6,7 @@ import { AuthLayout } from "./components/layouts/AuthLayout";
 import { AppLayout } from "./components/layouts/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
       </Route>
       <Route element={<RequireAuth />}>
         <Route element={<AppLayout />}>
-          <Route path={ROUTES.home} element={<p>home</p>} />
+          <Route path={ROUTES.home} element={<HomePage />} />
         </Route>
       </Route>
       {import.meta.env.DEV && (
