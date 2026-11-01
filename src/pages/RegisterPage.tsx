@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { Navigate } from "react-router-dom";
 import { register } from "../api/auth";
 import { errorMessage } from "../api/errorMessage";
-import { useAuth } from "../auth/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { Button } from "../components/Button";
 import { Field } from "../components/Field";
 import { StatusLine } from "../components/StatusLine";
