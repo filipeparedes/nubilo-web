@@ -4,10 +4,10 @@ The shells that wrap the pages. A layout draws the parts shared by a group of pa
 
 ## Structure
 
-| File            | Role                                                                                                                                                                                      |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AuthLayout.tsx` | Shell of the login and register pages: the app name, the switch between the two pages and the box where the form is drawn.                                                               |
-| `AppLayout.tsx`  | Shell of the app after login: top bar (app name, state and latency of the API, logout), command bar, side panel, content area and status bar (user and state of the server).             |
+| File             | Role                                                                                                                                                                         |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AuthLayout.tsx` | Shell of the login and register pages: the app name, the switch between the two pages and the box where the form is drawn.                                                   |
+| `AppLayout.tsx`  | Shell of the app after login: top bar (app name, state and latency of the API, logout), command bar, side panel, content area and status bar (user and state of the server). |
 
 ## How it works
 

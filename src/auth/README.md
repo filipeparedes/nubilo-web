@@ -7,7 +7,7 @@ The session of the logged-in user: whether there is one, how it starts and ends,
 | File               | Role                                                                                             |
 | ------------------ | ------------------------------------------------------------------------------------------------ |
 | `AuthContext.ts`   | Defines what components can read about the session: `isAuthenticated`, `login()` and `logout()`. |
-| `AuthProvider.tsx` | Keeps the session and provides it to the whole app. Mounted once, in `main.tsx`.                 |                                                 |
+| `AuthProvider.tsx` | Keeps the session and provides it to the whole app. Mounted once, in `main.tsx`.                 |     |
 | `RequireAuth.tsx`  | A route guard: lets the wrapped routes through only when there is a session.                     |
 
 ## How it works
