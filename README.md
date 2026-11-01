@@ -6,8 +6,8 @@ The web frontend for [nubilo](https://github.com/filipeparedes/nubilo), a person
 
 | Feature                                         | Status  |
 | ----------------------------------------------- | ------- |
-| Project setup and API client                    | Planned |
-| Register, login and logout                      | Planned |
+| Project setup and API client                    | Done    |
+| Register, login and logout                      | Done    |
 | File browser: folders, upload, download, delete | Planned |
 | Version history: list, download, restore        | Planned |
 | Version comparison                              | Planned |
