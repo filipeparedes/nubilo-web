@@ -8,6 +8,8 @@ import { Wordmark } from "../components/Wordmark";
 import type { Column } from "../components/DataTable";
 import { DataTable } from "../components/DataTable";
 import { EmptyState } from "../components/EmptyState";
+import { FileTable } from "../components/FileTable";
+import type { Entry } from "../utils/entries";
 
 interface Row {
   id: number;
@@ -32,6 +34,39 @@ const rows: Row[] = [
   { id: 1, name: "notes.txt", size: "18.4 KB", type: "text/plain" },
   { id: 2, name: "project-brief.md", size: "6.8 KB", type: "text/markdown" },
   { id: 3, name: "roadmap.csv", size: "42.1 KB", type: "text/csv" },
+];
+
+const entries: Entry[] = [
+  {
+    kind: "folder",
+    id: 1,
+    path: "docs",
+    createdAt: "2026-04-02 14:08:00",
+  },
+  {
+    kind: "folder",
+    id: 2,
+    path: "images",
+    createdAt: "2026-03-30 09:16:00",
+  },
+  {
+    kind: "file",
+    id: 3,
+    path: "notes.txt",
+    size: 18841,
+    contentType: "text/plain",
+    createdAt: "2026-04-01 10:00:00",
+    updatedAt: "2026-04-08 16:42:00",
+  },
+  {
+    kind: "file",
+    id: 4,
+    path: "project-brief.md",
+    size: 6963,
+    contentType: "text/markdown",
+    createdAt: "2026-04-01 10:00:00",
+    updatedAt: "2026-04-07 11:20:00",
+  },
 ];
 
 // Development-only sandbox: put components here to see how they look.
@@ -60,8 +95,6 @@ export default function ComponentsPage() {
       <StatusLine tone="success">file uploaded</StatusLine>
 
       <Wordmark size="md" />
-      <Wordmark size="lg" />
-      <Wordmark size="lg" cursor={false} />
 
       <DataTable
         label="Test table"
@@ -77,6 +110,9 @@ export default function ComponentsPage() {
         getKey={(row) => row.id}
         empty={<EmptyState message="Nothing here yet." />}
       />
+
+      <FileTable entries={entries} />
+      <FileTable entries={[]} />
     </main>
   );
 }
