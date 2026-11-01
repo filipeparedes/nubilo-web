@@ -15,7 +15,9 @@ const columns: Column<Entry>[] = [
     width: "minmax(150px, 1.3fr)",
     render: (entry) =>
       entry.kind === "folder" ? (
-        <span className="font-semibold text-accent">{baseName(entry.path)}/</span>
+        <span className="font-semibold text-accent">
+          {baseName(entry.path)}/
+        </span>
       ) : (
         baseName(entry.path)
       ),
@@ -28,7 +30,8 @@ const columns: Column<Entry>[] = [
   {
     header: "CONTENT TYPE",
     width: "minmax(120px, 1fr)",
-    render: (entry) => (entry.kind === "folder" ? "directory" : entry.contentType),
+    render: (entry) =>
+      entry.kind === "folder" ? "directory" : entry.contentType,
   },
   {
     header: "UPDATED",

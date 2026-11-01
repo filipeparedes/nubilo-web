@@ -3,8 +3,7 @@ import { baseName } from "./format";
 
 // A row of the listing: a folder or a file.
 export type Entry =
-  | ({ kind: "folder" } & FolderInfo)
-  | ({ kind: "file" } & FileInfo);
+  ({ kind: "folder" } & FolderInfo) | ({ kind: "file" } & FileInfo);
 
 // Joins the folders and the files of a folder into one list: folders
 // first, each group sorted by name. A filter keeps only the entries

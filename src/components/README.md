@@ -4,19 +4,19 @@ The reusable pieces of the interface. They take their look and behavior from pro
 
 ## Structure
 
-| File | Role |
-|---|---|
-| `Button.tsx` | The terminal-style button, drawn as `[ label ]`. Tones: normal, danger, success, muted. |
-| `Field.tsx` | A labelled input with the `>` prompt and the block cursor. `invalid` turns the border red. |
-| `RuleTitle.tsx` | A section title drawn as a rule, with a slot at the end. |
-| `Modal.tsx` | A dialog over a dimmed background. Closes with Escape, the backdrop or the button. |
-| `StatusLine.tsx` | A one-line message: error, success or muted. |
-| `Wordmark.tsx` | The app name, with the blinking cursor. |
-| `EmptyState.tsx` | The message of a list with nothing to show. |
-| `FilterBar.tsx` | The box that narrows a listing as you type, with the counter. |
-| `DataTable.tsx` | A generic table driven by column definitions. It does not know what the rows hold. |
-| `FileTable.tsx` | The listing of files and folders, built on `DataTable`. |
-| `layouts/` | The shells that wrap the pages (see its README). |
+| File             | Role                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| `Button.tsx`     | The terminal-style button, drawn as `[ label ]`. Tones: normal, danger, success, muted.    |
+| `Field.tsx`      | A labelled input with the `>` prompt and the block cursor. `invalid` turns the border red. |
+| `RuleTitle.tsx`  | A section title drawn as a rule, with a slot at the end.                                   |
+| `Modal.tsx`      | A dialog over a dimmed background. Closes with Escape, the backdrop or the button.         |
+| `StatusLine.tsx` | A one-line message: error, success or muted.                                               |
+| `Wordmark.tsx`   | The app name, with the blinking cursor.                                                    |
+| `EmptyState.tsx` | The message of a list with nothing to show.                                                |
+| `FilterBar.tsx`  | The box that narrows a listing as you type, with the counter.                              |
+| `DataTable.tsx`  | A generic table driven by column definitions. It does not know what the rows hold.         |
+| `FileTable.tsx`  | The listing of files and folders, built on `DataTable`.                                    |
+| `layouts/`       | The shells that wrap the pages (see its README).                                           |
 
 ## How it works
 

@@ -31,7 +31,11 @@ export default function HomePage() {
 
       {data && (
         <>
-          <FilterBar value={filter} onChange={setFilter} count={entries.length} />
+          <FilterBar
+            value={filter}
+            onChange={setFilter}
+            count={entries.length}
+          />
           <FileTable entries={entries} />
         </>
       )}
