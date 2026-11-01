@@ -4,11 +4,11 @@ One file per screen of the app. A page is routed in `App.tsx` and composes the c
 
 ## Structure
 
-| File               | Role                                                                                                                         |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| `LoginPage.tsx`    | Email and password form. Calls `login()` and shows the error of the backend. A logged-in user is sent home.                  |
-| `RegisterPage.tsx` | Email, password and confirmation. Checks that the two passwords match, creates the account and logs in.                      |
-| `ComponentsPage.tsx` | Development-only sandbox, available at `/components` with `npm run dev`. It is not part of the app.                        |
+| File                 | Role                                                                                                        |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `LoginPage.tsx`      | Email and password form. Calls `login()` and shows the error of the backend. A logged-in user is sent home. |
+| `RegisterPage.tsx`   | Email, password and confirmation. Checks that the two passwords match, creates the account and logs in.     |
+| `ComponentsPage.tsx` | Development-only sandbox, available at `/components` with `npm run dev`. It is not part of the app.         |
 
 ## How it works
 
