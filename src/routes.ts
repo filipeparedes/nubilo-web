@@ -9,7 +9,7 @@ export const ROUTES = {
   // the real path of a link, use routeTo below.
   folder: "/folders/:folderId",
   history: "/files/:fileId/history",
-  compare: "/file/:fileId/compare",
+  compare: "/files/:fileId/compare",
 } as const;
 
 export const routeTo = {
