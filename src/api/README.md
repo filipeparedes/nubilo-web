@@ -12,6 +12,7 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 | `errorMessage.ts`     | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                        |
 | `resources/auth.ts`   | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
 | `resources/health.ts` | The health check: `getHealth`.                                                                                                                                                                                              |
+| `types.ts` | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`. | e | resources/folders.ts | The contents of the root and of a folder. |
 
 ## How it works
 
