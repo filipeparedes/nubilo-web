@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../auth/AuthContext";
 
 // Gives access to the session: const { isAuthenticated, login, logout } = useAuth();
 export function useAuth() {
