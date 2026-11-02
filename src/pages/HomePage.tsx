@@ -27,8 +27,8 @@ export default function HomePage() {
           <h1 className="text-lg font-medium text-accent">/</h1>
         </div>
         <div className="flex gap-4">
-            <Button onClick={() => navigate(ROUTES.upload)}>upload</Button>
-            <Button onClick={() => refetch()}>refresh</Button>
+          <Button onClick={() => navigate(ROUTES.upload)}>upload</Button>
+          <Button onClick={() => refetch()}>refresh</Button>
         </div>
       </div>
 

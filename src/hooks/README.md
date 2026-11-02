@@ -4,8 +4,10 @@ The custom hooks of the app. Hooks that read data from the server use TanStack Q
 
 ## Structure
 
-| File                   | Role                                                                                                                                  |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `useAuth.ts`           | Reads the session (`isAuthenticated`, `email`, `login()`, `logout()`) from the context provided by `AuthProvider`.                    |
-| `useHealth.ts`         | The state of the API, checked every 10 seconds. `isSuccess` is online, `isError` is offline and `data.latencyMs` is the last latency. |
-| `useFolderContents.ts` | The contents of a folder, or of the root with no id. Its query key starts with "folder", so one invalidation refreshes every listing. |
+| File                   | Role                                                                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `useAuth.ts`           | Reads the session (`isAuthenticated`, `email`, `login()`, `logout()`) from the context provided by `AuthProvider`.                      |
+| `useHealth.ts`         | The state of the API, checked every 10 seconds. `isSuccess` is online, `isError` is offline and `data.latencyMs` is the last latency.   |
+| `useFolderContents.ts` | The contents of a folder, or of the root with no id. Its query key starts with "folder", so one invalidation refreshes every listing.   |
+| `useUploadFile.ts`     | Uploads one file to a path. When it succeeds it refreshes every listing.                                                                |
+| `useUploadFiles.ts`    | Uploads several files, one request per file and one after the other. Each file keeps its own status: pending, uploading, done or error. |
