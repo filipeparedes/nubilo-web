@@ -7,6 +7,7 @@ import { AppLayout } from "./components/layouts/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
+import UploadPage from "./pages/UploadPage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <Route element={<RequireAuth />}>
         <Route element={<AppLayout />}>
           <Route path={ROUTES.home} element={<HomePage />} />
+          <Route path={ROUTES.upload} element={<UploadPage />} />
         </Route>
       </Route>
       {import.meta.env.DEV && (
