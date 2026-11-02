@@ -4,19 +4,20 @@ import { formatSize } from "../utils/format";
 
 interface FileDropZoneProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "value"
+  "onChange" | "value" | "multiple"
 > {
-  // The chosen file, or null when there is none.
-  file: File | null;
-  onFileChange: (file: File | null) => void;
+  // The chosen files. An empty list means there is none.
+  files: File[];
+  onFilesChange: (files: File[]) => void;
 }
 
-// A box to drop a file on, or to click (or press Enter) to browse. It does
-// not upload anything: it only tells the parent which file was chosen. Every
-// other prop (accept, disabled...) goes to the hidden <input>.
+// A box to drop files on, or to click (or press Enter) to browse. It does
+// not upload anything: it only tells the parent which files were chosen.
+// Choosing again replaces the list. Every other prop (accept, disabled...)
+// goes to the hidden <input>.
 export function FileDropZone({
-  file,
-  onFileChange,
+  files,
+  onFilesChange,
   disabled = false,
   className = "",
   ...props
@@ -28,8 +29,10 @@ export function FileDropZone({
     event.preventDefault();
     setDragging(false);
     if (disabled) return;
-    onFileChange(event.dataTransfer.files[0] ?? null);
+    onFilesChange(Array.from(event.dataTransfer.files));
   }
+
+  const totalSize = files.reduce((sum, file) => sum + file.size, 0);
 
   return (
     <div
@@ -54,20 +57,32 @@ export function FileDropZone({
       <input
         ref={inputRef}
         type="file"
+        multiple
         className="hidden"
         disabled={disabled}
-        onChange={(event) => onFileChange(event.target.files?.[0] ?? null)}
+        onChange={(event) =>
+          onFilesChange(Array.from(event.target.files ?? []))
+        }
         {...props}
       />
-      {file ? (
+      {files.length === 0 ? (
         <>
-          <span className="text-accent">{file.name}</span>
-          <span className="text-muted">{formatSize(file.size)}</span>
+          <span className="text-accent">[ drop files here ]</span>
+          <span className="text-muted">or click to browse</span>
         </>
       ) : (
         <>
-          <span className="text-accent">[ drop a file here ]</span>
-          <span className="text-muted">or click to browse</span>
+          <ul className="max-h-40 w-full overflow-y-auto text-accent">
+            {files.map((file, index) => (
+              <li key={`${file.name}-${index}`} className="truncate">
+                {file.name}
+              </li>
+            ))}
+          </ul>
+          <span className="text-muted">
+            {files.length === 1 ? "1 file" : `${files.length} files`},{" "}
+            {formatSize(totalSize)}
+          </span>
         </>
       )}
     </div>

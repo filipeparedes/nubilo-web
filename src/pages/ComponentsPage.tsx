@@ -73,7 +73,7 @@ const entries: Entry[] = [
 // Development-only sandbox: put components here to see how they look.
 export default function ComponentsPage() {
   const [open, setOpen] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   return (
     <main className="flex flex-col gap-6 p-10">
@@ -116,7 +116,7 @@ export default function ComponentsPage() {
       <FileTable entries={entries} />
       <FileTable entries={[]} />
 
-      <FileDropZone file={file} onFileChange={setFile} />
+      <FileDropZone files={files} onFilesChange={setFiles} />
     </main>
   );
 }
