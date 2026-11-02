@@ -20,3 +20,10 @@ export function formatSize(bytes: number): string {
 export function formatDate(timestamp: string): string {
   return timestamp.replace("T", " ").slice(0, 16);
 }
+
+// A folder and a file name as one path: ("docs/", "a.txt") becomes "docs/a.txt".
+// An empty folder gives just the name, which stores the file at the root.
+export function joinPath(folder: string, name: string): string {
+  const clean = folder.trim().replace(/^\/+|\/+$/g, "");
+  return clean ? `${clean}/${name}` : name;
+}

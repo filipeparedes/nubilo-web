@@ -4,21 +4,23 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 
 ## Structure
 
-| File                  | Role                                                                                                                                                                                                                        |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config.ts`           | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                                                                                                 |
-| `endpoints.ts`        | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand.                                                                                                                                      |
-| `client.ts`           | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
-| `errorMessage.ts`     | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                        |
-| `resources/auth.ts`   | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
-| `resources/health.ts` | The health check: `getHealth`.                                                                                                                                                                                              |
-| `types.ts`            | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`.                                                                                                                                        | e   | resources/folders.ts | The contents of the root and of a folder. |
+| File                   | Role                                                                                                                                                                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `config.ts`            | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                                                                                                 |
+| `endpoints.ts`         | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand.                                                                                                                                      |
+| `client.ts`            | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
+| `errorMessage.ts`      | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                        |
+| `resources/auth.ts`    | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
+| `resources/health.ts`  | The health check: `getHealth`.                                                                                                                                                                                              |
+| `resources/files.ts`   | The file calls: `uploadFile`.                                                                                                                                                                                               |
+| `resources/folders.ts` | The contents of the root and of a folder.                                                                                                                                                                                   |
+| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`.                                                                                                                                        |
 
 ## How it works
 
 **Configuration.** The API address is not compiled into the app. `main.tsx` calls `loadConfig()` before rendering anything, so the address comes from `public/config.json` and can change without rebuilding. If the file is missing or invalid the app shows the error instead of a blank page. `getConfig()` throws if it is called before the configuration has loaded.
 
-**Requests.** `request<T>(path, options)` builds the URL from the configured address, adds `Authorization: Bearer <token>` when a token is stored, sends `body` as JSON and returns the parsed response (`undefined` for `204 No Content`). `query` values are added to the URL, and `undefined` ones are skipped.
+**Requests.** `request<T>(path, options)` builds the URL from the configured address, adds `Authorization: Bearer <token>` when a token is stored, sends `body` as JSON (or as it is when it is a `FormData`, which is how files are uploaded) and returns the parsed response (`undefined` for `204 No Content`). `query` values are added to the URL, and `undefined` ones are skipped.
 
 ```ts
 const versions = await request<Version[]>(ENDPOINTS.versions(1));
@@ -34,7 +36,7 @@ await request(ENDPOINTS.folders, { method: "POST", body: { path: "docs" } });
 
 ## Not covered yet
 
-`request()` only handles JSON. File upload (`multipart/form-data`) and download (binary) will have their own functions when those features are built.
+`request()` only reads JSON responses. Download (binary) will have its own function when that feature is built.
 
 ## Tests
 

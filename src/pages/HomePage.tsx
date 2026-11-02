@@ -6,11 +6,14 @@ import { FilterBar } from "../components/FilterBar";
 import { StatusLine } from "../components/StatusLine";
 import { useFolderContents } from "../hooks/useFolderContents";
 import { toEntries } from "../utils/entries";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes";
 
 // The root of the user's storage.
 export default function HomePage() {
   const { data, isPending, error, refetch } = useFolderContents();
   const [filter, setFilter] = useState("");
+  const navigate = useNavigate();
 
   const entries = data ? toEntries(data, filter) : [];
 
@@ -23,7 +26,10 @@ export default function HomePage() {
           </p>
           <h1 className="text-lg font-medium text-accent">/</h1>
         </div>
-        <Button onClick={() => refetch()}>refresh</Button>
+        <div className="flex gap-4">
+          <Button onClick={() => navigate(ROUTES.upload)}>upload</Button>
+          <Button onClick={() => refetch()}>refresh</Button>
+        </div>
       </div>
 
       {isPending && <StatusLine tone="muted">loading...</StatusLine>}
