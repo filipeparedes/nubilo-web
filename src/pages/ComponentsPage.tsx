@@ -10,6 +10,7 @@ import { DataTable } from "../components/DataTable";
 import { EmptyState } from "../components/EmptyState";
 import { FileTable } from "../components/FileTable";
 import type { Entry } from "../utils/entries";
+import { FileDropZone } from "../components/FileDropZone";
 
 interface Row {
   id: number;
@@ -72,6 +73,7 @@ const entries: Entry[] = [
 // Development-only sandbox: put components here to see how they look.
 export default function ComponentsPage() {
   const [open, setOpen] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   return (
     <main className="flex flex-col gap-6 p-10">
@@ -113,6 +115,8 @@ export default function ComponentsPage() {
 
       <FileTable entries={entries} />
       <FileTable entries={[]} />
+
+      <FileDropZone file={file} onFileChange={setFile} />
     </main>
   );
 }
