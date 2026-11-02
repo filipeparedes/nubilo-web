@@ -159,4 +159,21 @@ describe("request", () => {
     expect(handler).toHaveBeenCalledOnce();
     setUnauthorizedHandler(null);
   });
+
+  it("sends a FormData body as it is, without a JSON content type", async () => {
+    fetchMock.mockResolvedValue(jsonResponse(201, { id: 1 }));
+    const body = new FormData();
+    body.append("file", new Blob(["x"]), "a.txt");
+
+    await request("/files", {
+      method: "POST",
+      body,
+      query: { path: "docs/a.txt" },
+    });
+
+    const [url, init] = fetchMock.mock.calls[0];
+    expect(url.toString()).toBe("http://api.test/files?path=docs%2Fa.txt");
+    expect(init.body).toBe(body);
+    expect(init.headers["Content-Type"]).toBeUndefined();
+  });
 });

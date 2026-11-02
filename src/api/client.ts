@@ -61,7 +61,8 @@ export async function request<T>(
   const token = getToken();
   if (token) headers.Authorization = `Bearer ${token}`;
   const isForm = body instanceof FormData;
-  if (body !== undefined && !isForm) headers["Content-Type"] = "application/json";
+  if (body !== undefined && !isForm)
+    headers["Content-Type"] = "application/json";
 
   const res = await fetch(url, {
     method,
