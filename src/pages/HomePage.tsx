@@ -8,12 +8,15 @@ import { useFolderContents } from "../hooks/useFolderContents";
 import { toEntries } from "../utils/entries";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes";
+import { useDownloadFile } from "../hooks/useDownloadFile";
 
 // The root of the user's storage.
 export default function HomePage() {
   const { data, isPending, error, refetch } = useFolderContents();
   const [filter, setFilter] = useState("");
+  
   const navigate = useNavigate();
+  const download = useDownloadFile();
 
   const entries = data ? toEntries(data, filter) : [];
 
@@ -34,6 +37,7 @@ export default function HomePage() {
 
       {isPending && <StatusLine tone="muted">loading...</StatusLine>}
       {error && <StatusLine>{errorMessage(error)}</StatusLine>}
+      {download.error && <StatusLine>{errorMessage(download.error)}</StatusLine>}
 
       {data && (
         <>
@@ -42,7 +46,7 @@ export default function HomePage() {
             onChange={setFilter}
             count={entries.length}
           />
-          <FileTable entries={entries} />
+          <FileTable entries={entries} onDownload={(file) => download.mutate(file)} />
         </>
       )}
     </>
