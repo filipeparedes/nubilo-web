@@ -63,9 +63,7 @@ function actionsColumn({
     render: (entry) =>
       entry.kind === "file" ? (
         <span className="flex gap-4">
-          {onDownload && (
-            <Button onClick={() => onDownload(entry)}>get</Button>
-          )}
+          {onDownload && <Button onClick={() => onDownload(entry)}>get</Button>}
           {onDelete && (
             <Button tone="danger" onClick={() => onDelete(entry)}>
               del

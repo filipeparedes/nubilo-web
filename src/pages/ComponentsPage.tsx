@@ -75,7 +75,6 @@ const entries: Entry[] = [
 export default function ComponentsPage() {
   const [open, setOpen] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
-  const download = useDownloadFile();
 
   return (
     <main className="flex flex-col gap-6 p-10">
