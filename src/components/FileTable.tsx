@@ -3,8 +3,10 @@ import { baseName, formatDate, formatSize } from "../utils/format";
 import type { Column } from "./DataTable";
 import { DataTable } from "./DataTable";
 import { EmptyState } from "./EmptyState";
+import type { FileInfo } from "../api/types";
+import { Button } from "./Button";
 
-const columns: Column<Entry>[] = [
+const baseColumns: Column<Entry>[] = [
   {
     header: "MODE",
     width: "70px",
@@ -41,8 +43,31 @@ const columns: Column<Entry>[] = [
   },
 ];
 
+// The column with the [ download ] button. Folders have no action yet.
+function downloadColumn(onDownload: (file: FileInfo) => void): Column<Entry> {
+  return {
+    header: "ACTIONS",
+    width: "110px",
+    render: (entry) =>
+      entry.kind === "file" ? (
+        <Button onClick={() => onDownload(entry)}> get </Button>
+      ) : null,
+  };
+}
+
+interface FileTableProps {
+  entries: Entry[];
+  // Called with the file when its download button is pressed. Without it
+  // the table has no actions column.
+  onDownload?: (file: FileInfo) => void;
+}
+
 // The listing of the files and folders of a directory.
-export function FileTable({ entries }: { entries: Entry[] }) {
+export function FileTable({ entries, onDownload }: FileTableProps) {
+  const columns = onDownload
+    ? [...baseColumns, downloadColumn(onDownload)]
+    : baseColumns;
+
   return (
     <DataTable
       label="Files"
