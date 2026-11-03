@@ -176,4 +176,12 @@ describe("request", () => {
     expect(init.body).toBe(body);
     expect(init.headers["Content-Type"]).toBeUndefined();
   });
+
+  it("returns the body as a Blob when asked for one", async () => {
+    fetchMock.mockResolvedValueOnce(new Response("hello", { status: 200 }));
+
+    const blob = await request<Blob>("/files/1", { as: "blob" });
+
+    expect(blob.size).toBe(5);
+  });
 });
