@@ -115,7 +115,7 @@ export default function ComponentsPage() {
         empty={<EmptyState message="Nothing here yet." />}
       />
 
-      <FileTable entries={entries} onDownload={(file) => download.mutate(file)} />
+      <FileTable entries={entries} onDownload={() => {}} onDelete={() => {}} />
       <FileTable entries={[]} />
 
       <FileDropZone files={files} onFilesChange={setFiles} />

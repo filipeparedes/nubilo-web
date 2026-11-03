@@ -43,30 +43,46 @@ const baseColumns: Column<Entry>[] = [
   },
 ];
 
-// The column with the [ download ] button. Folders have no action yet.
-function downloadColumn(onDownload: (file: FileInfo) => void): Column<Entry> {
+interface FileTableProps {
+  entries: Entry[];
+  // Called with the file when its get button is pressed.
+  onDownload?: (file: FileInfo) => void;
+  // Called with the file when its del button is pressed.
+  onDelete?: (file: FileInfo) => void;
+}
+
+// The column with the action buttons. Folders have no action yet. Only
+// the buttons whose callback was given are drawn.
+function actionsColumn({
+  onDownload,
+  onDelete,
+}: Pick<FileTableProps, "onDownload" | "onDelete">): Column<Entry> {
   return {
     header: "ACTIONS",
-    width: "110px",
+    width: "140px",
     render: (entry) =>
       entry.kind === "file" ? (
-        <Button onClick={() => onDownload(entry)}> get </Button>
+        <span className="flex gap-4">
+          {onDownload && (
+            <Button onClick={() => onDownload(entry)}>get</Button>
+          )}
+          {onDelete && (
+            <Button tone="danger" onClick={() => onDelete(entry)}>
+              del
+            </Button>
+          )}
+        </span>
       ) : null,
   };
 }
 
-interface FileTableProps {
-  entries: Entry[];
-  // Called with the file when its download button is pressed. Without it
-  // the table has no actions column.
-  onDownload?: (file: FileInfo) => void;
-}
-
-// The listing of the files and folders of a directory.
-export function FileTable({ entries, onDownload }: FileTableProps) {
-  const columns = onDownload
-    ? [...baseColumns, downloadColumn(onDownload)]
-    : baseColumns;
+// The listing of the files and folders of a directory. Without any
+// callback the table has no actions column.
+export function FileTable({ entries, onDownload, onDelete }: FileTableProps) {
+  const columns =
+    onDownload || onDelete
+      ? [...baseColumns, actionsColumn({ onDownload, onDelete })]
+      : baseColumns;
 
   return (
     <DataTable
