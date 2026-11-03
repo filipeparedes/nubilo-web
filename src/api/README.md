@@ -12,7 +12,7 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 | `errorMessage.ts`      | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                        |
 | `resources/auth.ts`    | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
 | `resources/health.ts`  | The health check: `getHealth`.                                                                                                                                                                                              |
-| `resources/files.ts`   | The file calls: `uploadFile`.                                                                                                                                                                                               |
+| `resources/files.ts`   | The file calls: `uploadFile`, `downloadFile` and `deleteFile`.                                                                                                                                                              |
 | `resources/folders.ts` | The contents of the root and of a folder.                                                                                                                                                                                   |
 | `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`.                                                                                                                                        |
 
@@ -20,7 +20,7 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 
 **Configuration.** The API address is not compiled into the app. `main.tsx` calls `loadConfig()` before rendering anything, so the address comes from `public/config.json` and can change without rebuilding. If the file is missing or invalid the app shows the error instead of a blank page. `getConfig()` throws if it is called before the configuration has loaded.
 
-**Requests.** `request<T>(path, options)` builds the URL from the configured address, adds `Authorization: Bearer <token>` when a token is stored, sends `body` as JSON (or as it is when it is a `FormData`, which is how files are uploaded) and returns the parsed response (`undefined` for `204 No Content`). `query` values are added to the URL, and `undefined` ones are skipped.
+**Requests.** `request<T>(path, options)` builds the URL from the configured address, adds `Authorization: Bearer <token>` when a token is stored, sends `body` as JSON (or as it is when it is a `FormData`, which is how files are uploaded) and returns the parsed response (`undefined` for `204 No Content`, or a `Blob` with `as: "blob"`, which is how files are downloaded). `query` values are added to the URL, and `undefined` ones are skipped.
 
 ```ts
 const versions = await request<Version[]>(ENDPOINTS.versions(1));
@@ -33,10 +33,6 @@ await request(ENDPOINTS.folders, { method: "POST", body: { path: "docs" } });
 **Errors.** Any non-2xx response throws an `ApiError` with the HTTP `status`, the backend error `code` (`UNAUTHORIZED`, `NOT_FOUND`, `INVALID_REQUEST`, `INVALID_PATH`, `PATH_CONFLICT`) and the `message`. Screens decide what to do from the `code`, not by parsing text. If the body is not the expected JSON (a proxy error page, for example) the code is `UNKNOWN` and the message is the HTTP status text.
 
 **Session token.** The token is kept in `localStorage`, so a page refresh does not log the user out. On a `401` the client forgets the token, calls the handler registered with `setUnauthorizedHandler()` and throws. The auth provider registers that handler so the app state follows the token (see `src/auth/README.md`).
-
-## Not covered yet
-
-`request()` only reads JSON responses. Download (binary) will have its own function when that feature is built.
 
 ## Tests
 

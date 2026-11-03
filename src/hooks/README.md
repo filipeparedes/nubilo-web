@@ -11,3 +11,5 @@ The custom hooks of the app. Hooks that read data from the server use TanStack Q
 | `useFolderContents.ts` | The contents of a folder, or of the root with no id. Its query key starts with "folder", so one invalidation refreshes every listing.   |
 | `useUploadFile.ts`     | Uploads one file to a path. When it succeeds it refreshes every listing.                                                                |
 | `useUploadFiles.ts`    | Uploads several files, one request per file and one after the other. Each file keeps its own status: pending, uploading, done or error. |
+| `useDownloadFile.ts`   | Downloads a file and saves it on the user's computer under its own name.                                                                |
+| `useDeleteFile.ts`     | Deletes a file with all its versions. When it succeeds it refreshes every listing.                                                      |

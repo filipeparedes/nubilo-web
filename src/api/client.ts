@@ -43,6 +43,8 @@ interface RequestOptions {
   body?: unknown;
   // Appended to the URL as ?key=value. Undefined values are skipped.
   query?: Record<string, string | number | undefined>;
+  // How to read a successful response. "blob" is for file downloads.
+  as?: "json" | "blob";
 }
 
 // Single entry point for every JSON call to the backend. It builds the
@@ -50,7 +52,7 @@ interface RequestOptions {
 // one, and turns error responses into ApiError.
 export async function request<T>(
   path: string,
-  { method = "GET", body, query }: RequestOptions = {},
+  { method = "GET", body, query, as = "json" }: RequestOptions = {},
 ): Promise<T> {
   const url = new URL(path, getConfig().api.url);
   for (const [key, value] of Object.entries(query ?? {})) {
@@ -91,5 +93,6 @@ export async function request<T>(
 
   // 204 No Content has no body to parse.
   if (res.status === 204) return undefined as T;
+  if (as === "blob") return (await res.blob()) as T;
   return (await res.json()) as T;
 }

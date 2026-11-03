@@ -3,8 +3,10 @@ import { baseName, formatDate, formatSize } from "../utils/format";
 import type { Column } from "./DataTable";
 import { DataTable } from "./DataTable";
 import { EmptyState } from "./EmptyState";
+import type { FileInfo } from "../api/types";
+import { Button } from "./Button";
 
-const columns: Column<Entry>[] = [
+const baseColumns: Column<Entry>[] = [
   {
     header: "MODE",
     width: "70px",
@@ -41,8 +43,45 @@ const columns: Column<Entry>[] = [
   },
 ];
 
-// The listing of the files and folders of a directory.
-export function FileTable({ entries }: { entries: Entry[] }) {
+interface FileTableProps {
+  entries: Entry[];
+  // Called with the file when its get button is pressed.
+  onDownload?: (file: FileInfo) => void;
+  // Called with the file when its del button is pressed.
+  onDelete?: (file: FileInfo) => void;
+}
+
+// The column with the action buttons. Folders have no action yet. Only
+// the buttons whose callback was given are drawn.
+function actionsColumn({
+  onDownload,
+  onDelete,
+}: Pick<FileTableProps, "onDownload" | "onDelete">): Column<Entry> {
+  return {
+    header: "ACTIONS",
+    width: "140px",
+    render: (entry) =>
+      entry.kind === "file" ? (
+        <span className="flex gap-4">
+          {onDownload && <Button onClick={() => onDownload(entry)}>get</Button>}
+          {onDelete && (
+            <Button tone="danger" onClick={() => onDelete(entry)}>
+              del
+            </Button>
+          )}
+        </span>
+      ) : null,
+  };
+}
+
+// The listing of the files and folders of a directory. Without any
+// callback the table has no actions column.
+export function FileTable({ entries, onDownload, onDelete }: FileTableProps) {
+  const columns =
+    onDownload || onDelete
+      ? [...baseColumns, actionsColumn({ onDownload, onDelete })]
+      : baseColumns;
+
   return (
     <DataTable
       label="Files"

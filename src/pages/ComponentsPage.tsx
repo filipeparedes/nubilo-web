@@ -11,6 +11,7 @@ import { EmptyState } from "../components/EmptyState";
 import { FileTable } from "../components/FileTable";
 import type { Entry } from "../utils/entries";
 import { FileDropZone } from "../components/FileDropZone";
+import { useDownloadFile } from "../hooks/useDownloadFile";
 
 interface Row {
   id: number;
@@ -113,7 +114,7 @@ export default function ComponentsPage() {
         empty={<EmptyState message="Nothing here yet." />}
       />
 
-      <FileTable entries={entries} />
+      <FileTable entries={entries} onDownload={() => {}} onDelete={() => {}} />
       <FileTable entries={[]} />
 
       <FileDropZone files={files} onFilesChange={setFiles} />
