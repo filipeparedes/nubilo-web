@@ -15,10 +15,10 @@ export function uploadFile(file: File, path: string) {
 
 // Downloads the latest content of a file.
 export function downloadFile(id: number) {
-    return request<Blob>(ENDPOINTS.file(id), { as: "blob" });
+  return request<Blob>(ENDPOINTS.file(id), { as: "blob" });
 }
 
 // Deletes a file together with all its versions.
 export function deleteFile(id: number) {
-    return request<void>(ENDPOINTS.file(id), { method: "DELETE" });
+  return request<void>(ENDPOINTS.file(id), { method: "DELETE" });
 }
