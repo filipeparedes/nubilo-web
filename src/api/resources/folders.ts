@@ -4,7 +4,7 @@ import type { FolderContents } from "../types";
 
 // What the root of the user's storage holds.
 export function getRootContents() {
-  return request<FolderContents>(ENDPOINTS.folders);
+  return request<FolderContents>(ENDPOINTS.rootContents);
 }
 
 // What a folder holds.
