@@ -121,15 +121,14 @@ export default function ComponentsPage() {
 
       <FileExplorer
         folders={[
-            { id: 1, path: "docs", createdAt: "2026-04-02T14:08:00Z" },
-            { id: 2, path: "docs/2026", createdAt: "2026-04-02T14:08:00Z" },
-            { id: 3, path: "images", createdAt: "2026-03-30T09:16:00Z" },
+          { id: 1, path: "docs", createdAt: "2026-04-02T14:08:00Z" },
+          { id: 2, path: "docs/2026", createdAt: "2026-04-02T14:08:00Z" },
+          { id: 3, path: "images", createdAt: "2026-03-30T09:16:00Z" },
         ]}
         activeFolderId={2}
         onOpenRoot={() => {}}
         onOpenFolder={() => {}}
-        />
+      />
     </main>
   );
 }
-

@@ -1,16 +1,31 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useMatch, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useHealth } from "../../hooks/useHealth";
 import { Button } from "../Button";
 import { RuleTitle } from "../RuleTitle";
 import { Wordmark } from "../Wordmark";
+import { errorMessage } from "../../api/errorMessage";
+import { useFolders } from "../../hooks/useFolders";
+import { ROUTES, routeTo } from "../../routes";
+import { FileExplorer } from "../FileExplorer";
+import { StatusLine } from "../StatusLine";
 
 // Shell of the app after login: top bar, command bar, side panel, the
 // area where each screen is drawn (<Outlet />) and the status bar.
 export function AppLayout() {
   const { email, logout } = useAuth();
   const health = useHealth();
+  const navigate = useNavigate();
+  const folders = useFolders();
 
+  // The folder to highlight in the tree: the one in the address, the root on
+  // the home page, and nothing on the other pages.
+  const homeMatch = useMatch(ROUTES.home);
+  const activeFolderId = folderMatch
+    ? Number(folderMatch.params.folderId)
+    : homeMatch
+      ? null
+      : undefined;
   const user = email?.split("@")[0] ?? "user";
 
   const api = health.isSuccess
@@ -46,8 +61,19 @@ export function AppLayout() {
       </div>
 
       <div className="grid min-h-0 grid-cols-1 md:grid-cols-[218px_minmax(0,1fr)]">
-        <aside className="hidden min-h-0 flex-col border-r border-line bg-panel p-3 md:flex">
+        <aside className="hidden min-h-0 flex-col gap-2 overflow-y-auto border-r border-line bg-panel p-3 md:flex">
           <RuleTitle title="filesystem" />
+          {folders.error && (
+            <StatusLine>{errorMessage(folders.error)}</StatusLine>
+          )}
+          {folders.data && (
+            <FileExplorer
+              folders={folders.data}
+              activeFolderId={activeFolderId}
+              onOpenRoot={() => navigate(ROUTES.home)}
+              onOpenFolder={(folder) => navigate(routeTo.folder(folder.id))}
+            />
+          )}
         </aside>
 
         <main className="min-h-0 min-w-0 overflow-auto bg-bg p-3 md:p-4">
