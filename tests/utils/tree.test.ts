@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { FolderInfo } from "../../src/api/types";
-import { buildTree } from "../../src/utils/tree";
+import { ancestorIds, buildTree } from "../../src/utils/tree";
 
 function folder(id: number, path: string): FolderInfo {
   return { id, path, createdAt: "2026-04-01T10:00:00Z" };
@@ -56,5 +56,30 @@ describe("buildTree", () => {
 
     expect(tree).toHaveLength(1);
     expect(tree[0].name).toBe("sub");
+  });
+});
+
+describe("ancestorIds", () => {
+  const folders = [
+    folder(1, "docs"),
+    folder(2, "docs/2026"),
+    folder(3, "docs/2026/april"),
+    folder(4, "img"),
+  ];
+
+  it("lists the folders that contain a folder, outermost first", () => {
+    expect(ancestorIds(folders, 3)).toEqual([1, 2]);
+  });
+
+  it("is empty for a top-level folder", () => {
+    expect(ancestorIds(folders, 4)).toEqual([]);
+  });
+
+  it("is empty for an unknown id", () => {
+    expect(ancestorIds(folders, 99)).toEqual([]);
+  });
+
+  it("skips a parent that is not in the list", () => {
+    expect(ancestorIds([folder(1, "a/b/c")], 1)).toEqual([]);
   });
 });
