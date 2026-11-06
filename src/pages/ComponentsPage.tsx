@@ -11,6 +11,7 @@ import { EmptyState } from "../components/EmptyState";
 import { FileTable } from "../components/FileTable";
 import type { Entry } from "../utils/entries";
 import { FileDropZone } from "../components/FileDropZone";
+import { FileExplorer } from "../components/FileExplorer";
 
 interface Row {
   id: number;
@@ -117,6 +118,18 @@ export default function ComponentsPage() {
       <FileTable entries={[]} />
 
       <FileDropZone files={files} onFilesChange={setFiles} />
+
+      <FileExplorer
+        folders={[
+            { id: 1, path: "docs", createdAt: "2026-04-02T14:08:00Z" },
+            { id: 2, path: "docs/2026", createdAt: "2026-04-02T14:08:00Z" },
+            { id: 3, path: "images", createdAt: "2026-03-30T09:16:00Z" },
+        ]}
+        activeFolderId={2}
+        onOpenRoot={() => {}}
+        onOpenFolder={() => {}}
+        />
     </main>
   );
 }
+
