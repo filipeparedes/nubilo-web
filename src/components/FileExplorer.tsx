@@ -106,7 +106,9 @@ function Branch({
               active={node.folder.id === activeFolderId}
               onClick={() => onOpenFolder(node.folder)}
               expanded={expanded}
-              onToggle={hasChildren ? () => onToggle(node.folder.id) : undefined}
+              onToggle={
+                hasChildren ? () => onToggle(node.folder.id) : undefined
+              }
             />
             {hasChildren && expanded && (
               <Branch
