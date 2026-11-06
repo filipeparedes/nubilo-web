@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { FolderInfo } from "../api/types";
-import { buildTree } from "../utils/tree";
+import { ancestorIds, buildTree } from "../utils/tree";
 import type { FolderNode } from "../utils/tree";
 import { Button } from "./Button";
 
@@ -65,20 +65,31 @@ function Item({
   );
 }
 
+// The open folders plus the ones that contain a folder, so that folder can
+// be seen in the tree.
+function withAncestors(
+  open: Set<number>,
+  folders: FolderInfo[],
+  folderId?: number | null,
+): Set<number> {
+  if (typeof folderId !== "number") return open;
+  return new Set([...open, ...ancestorIds(folders, folderId)]);
+}
+
 // The folders under a folder, and their own folders, one level deeper each.
 // A closed folder does not draw its children, so the lines below it move up.
 function Branch({
   nodes,
   depth,
   activeFolderId,
-  closed,
+  open,
   onToggle,
   onOpenFolder,
 }: {
   nodes: FolderNode[];
   depth: number;
   activeFolderId?: number | null;
-  closed: Set<number>;
+  open: Set<number>;
   onToggle: (folderId: number) => void;
   onOpenFolder: (folder: FolderInfo) => void;
 }) {
@@ -86,7 +97,7 @@ function Branch({
     <ul>
       {nodes.map((node) => {
         const hasChildren = node.children.length > 0;
-        const expanded = !closed.has(node.folder.id);
+        const expanded = open.has(node.folder.id);
         return (
           <li key={node.folder.id}>
             <Item
@@ -95,16 +106,14 @@ function Branch({
               active={node.folder.id === activeFolderId}
               onClick={() => onOpenFolder(node.folder)}
               expanded={expanded}
-              onToggle={
-                hasChildren ? () => onToggle(node.folder.id) : undefined
-              }
+              onToggle={hasChildren ? () => onToggle(node.folder.id) : undefined}
             />
             {hasChildren && expanded && (
               <Branch
                 nodes={node.children}
                 depth={depth + 1}
                 activeFolderId={activeFolderId}
-                closed={closed}
+                open={open}
                 onToggle={onToggle}
                 onOpenFolder={onOpenFolder}
               />
@@ -118,7 +127,8 @@ function Branch({
 
 // The tree of all the folders, starting at the root. It does not load
 // anything: the parent gives it the folders and learns which one was pressed.
-// Every folder starts open, and the ones the user closes are remembered here.
+// Every folder starts closed, except the ones that hold the current folder,
+// so the user can always see where they are.
 export function FileExplorer({
   folders,
   activeFolderId,
@@ -126,10 +136,20 @@ export function FileExplorer({
   onOpenFolder,
 }: FileExplorerProps) {
   const tree = useMemo(() => buildTree(folders), [folders]);
-  const [closed, setClosed] = useState<Set<number>>(new Set());
+  const [open, setOpen] = useState<Set<number>>(() =>
+    withAncestors(new Set(), folders, activeFolderId),
+  );
+
+  // When the current folder changes (a click on the table, the back button),
+  // open the way to it.
+  const [shownFolderId, setShownFolderId] = useState(activeFolderId);
+  if (shownFolderId !== activeFolderId) {
+    setShownFolderId(activeFolderId);
+    setOpen((current) => withAncestors(current, folders, activeFolderId));
+  }
 
   function toggle(folderId: number) {
-    setClosed((current) => {
+    setOpen((current) => {
       const next = new Set(current);
       if (next.has(folderId)) next.delete(folderId);
       else next.add(folderId);
@@ -149,7 +169,7 @@ export function FileExplorer({
         nodes={tree}
         depth={1}
         activeFolderId={activeFolderId}
-        closed={closed}
+        open={open}
         onToggle={toggle}
         onOpenFolder={onOpenFolder}
       />
