@@ -33,3 +33,19 @@ export function buildTree(folders: FolderInfo[]): FolderNode[] {
   }
   return top;
 }
+
+// The ids of the folders that contain a folder, from the top level down to
+// its parent. It is empty for a top-level folder or an unknown id.
+export function ancestorIds(folders: FolderInfo[], folderId: number): number[] {
+  const target = folders.find((folder) => folder.id === folderId);
+  if (!target) return [];
+
+  const idByPath = new Map(folders.map((folder) => [folder.path, folder.id]));
+  const parts = target.path.split("/");
+  const ids: number[] = [];
+  for (let i = 1; i < parts.length; i++) {
+    const id = idByPath.get(parts.slice(0, i).join("/"));
+    if (id !== undefined) ids.push(id);
+  }
+  return ids;
+}
