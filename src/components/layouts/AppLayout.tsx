@@ -20,6 +20,7 @@ export function AppLayout() {
 
   // The folder to highlight in the tree: the one in the address, the root on
   // the home page, and nothing on the other pages.
+  const folderMatch = useMatch(ROUTES.folder);
   const homeMatch = useMatch(ROUTES.home);
   const activeFolderId = folderMatch
     ? Number(folderMatch.params.folderId)

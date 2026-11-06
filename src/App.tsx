@@ -19,6 +19,7 @@ export default function App() {
       <Route element={<RequireAuth />}>
         <Route element={<AppLayout />}>
           <Route path={ROUTES.home} element={<HomePage />} />
+          <Route path={ROUTES.folder} element={<HomePage />} />
           <Route path={ROUTES.upload} element={<UploadPage />} />
         </Route>
       </Route>
