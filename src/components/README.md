@@ -4,21 +4,21 @@ The reusable pieces of the interface. They take their look and behavior from pro
 
 ## Structure
 
-| File               | Role                                                                                                                                                                                                      |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Button.tsx`       | The terminal-style button, drawn as `[ label ]`. Tones: normal, danger, success, muted.                                                                                                                   |
-| `Field.tsx`        | A labelled input with the `>` prompt and the block cursor. `invalid` turns the border red.                                                                                                                |
-| `RuleTitle.tsx`    | A section title drawn as a rule, with a slot at the end.                                                                                                                                                  |
-| `Modal.tsx`        | A dialog over a dimmed background. Closes with Escape, the backdrop or the button.                                                                                                                        |
-| `StatusLine.tsx`   | A one-line message: error, success or muted.                                                                                                                                                              |
-| `Wordmark.tsx`     | The app name, with the blinking cursor.                                                                                                                                                                   |
-| `EmptyState.tsx`   | The message of a list with nothing to show.                                                                                                                                                               |
-| `FilterBar.tsx`    | The box that narrows a listing as you type, with the counter.                                                                                                                                             |
-| `DataTable.tsx`    | A generic table driven by column definitions. It does not know what the rows hold.                                                                                                                        |
+| File               | Role                                                                                                                                                                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Button.tsx`       | The terminal-style button, drawn as `[ label ]`. Tones: normal, danger, success, muted.                                                                                                                                             |
+| `Field.tsx`        | A labelled input with the `>` prompt and the block cursor. `invalid` turns the border red.                                                                                                                                          |
+| `RuleTitle.tsx`    | A section title drawn as a rule, with a slot at the end.                                                                                                                                                                            |
+| `Modal.tsx`        | A dialog over a dimmed background. Closes with Escape, the backdrop or the button.                                                                                                                                                  |
+| `StatusLine.tsx`   | A one-line message: error, success or muted.                                                                                                                                                                                        |
+| `Wordmark.tsx`     | The app name, with the blinking cursor.                                                                                                                                                                                             |
+| `EmptyState.tsx`   | The message of a list with nothing to show.                                                                                                                                                                                         |
+| `FilterBar.tsx`    | The box that narrows a listing as you type, with the counter.                                                                                                                                                                       |
+| `DataTable.tsx`    | A generic table driven by column definitions. It does not know what the rows hold.                                                                                                                                                  |
 | `FileTable.tsx`    | The listing of files and folders, built on `DataTable`. With `onOpenFolder`, `onDownload`, `onDelete` and `onDeleteFolder` the folder names open the folder, each file gets its get and del buttons and each folder its del button. |
-| `FileExplorer.tsx` | The tree of all the folders for the side panel. Folders start closed, except the ones that hold the current folder, and an arrow opens or closes each one. It loads nothing: it gets the folders by prop. |
-| `layouts/`         | The shells that wrap the pages (see its README).                                                                                                                                                          |
-| `FileDropZone.tsx` | A box to drop files on, or click to browse. It lists the chosen files and does not upload anything.                                                                                                       |
+| `FileExplorer.tsx` | The tree of all the folders for the side panel. Folders start closed, except the ones that hold the current folder, and an arrow opens or closes each one. It loads nothing: it gets the folders by prop.                           |
+| `layouts/`         | The shells that wrap the pages (see its README).                                                                                                                                                                                    |
+| `FileDropZone.tsx` | A box to drop files on, or click to browse. It lists the chosen files and does not upload anything.                                                                                                                                 |
 
 ## How it works
 

@@ -14,5 +14,5 @@ The custom hooks of the app. Hooks that read data from the server use TanStack Q
 | `useDownloadFile.ts`   | Downloads a file and saves it on the user's computer under its own name.                                                                          |
 | `useDeleteFile.ts`     | Deletes a file with all its versions. When it succeeds it refreshes every listing.                                                                |
 | `useFolders.ts`        | Every folder of the user, at any depth, for the folder tree. Its query key also starts with "folder", so it refreshes together with the listings. |
-| `useCreateFolder.ts`   | Creates a folder at a path. When it succeeds every listing and the folder tree are refreshed. |
-| `useDeleteFolder.ts`   | Deletes a folder with everything inside it. When it succeeds every listing and the folder tree are refreshed. |
+| `useCreateFolder.ts`   | Creates a folder at a path. When it succeeds every listing and the folder tree are refreshed.                                                     |
+| `useDeleteFolder.ts`   | Deletes a folder with everything inside it. When it succeeds every listing and the folder tree are refreshed.                                     |
