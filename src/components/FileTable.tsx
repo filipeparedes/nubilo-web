@@ -107,9 +107,7 @@ function actionsColumn({
       }
       return (
         <span className="flex gap-4">
-          {onDownload && (
-            <Button onClick={() => onDownload(entry)}>get</Button>
-          )}
+          {onDownload && <Button onClick={() => onDownload(entry)}>get</Button>}
           {onHistory && (
             <Button onClick={() => onHistory(entry)}>history</Button>
           )}
