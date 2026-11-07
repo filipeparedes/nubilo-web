@@ -4,6 +4,7 @@ import {
   formatDate,
   formatSize,
   joinPath,
+  versionedName,
 } from "../../src/utils/format";
 
 describe("baseName", () => {
@@ -45,5 +46,23 @@ describe("joinPath", () => {
   it("gives just the name when the folder is empty", () => {
     expect(joinPath("", "a.txt")).toBe("a.txt");
     expect(joinPath("  ", "a.txt")).toBe("a.txt");
+  });
+});
+
+describe("versionedName", () => {
+  it("puts the version before the extension", () => {
+    expect(versionedName("notes.txt", 2)).toBe("notes-v2.txt");
+  });
+
+  it("keeps only the last extension after the version", () => {
+    expect(versionedName("archive.tar.gz", 3)).toBe("archive.tar-v3.gz");
+  });
+
+  it("adds the suffix to a name without an extension", () => {
+    expect(versionedName("README", 1)).toBe("README-v1");
+  });
+
+  it("treats a leading dot as part of the name", () => {
+    expect(versionedName(".env", 4)).toBe(".env-v4");
   });
 });
