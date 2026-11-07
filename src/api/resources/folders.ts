@@ -16,3 +16,12 @@ export function getFolderContents(folderId: number) {
 export function getFolders() {
   return request<FolderInfo[]>(ENDPOINTS.folders);
 }
+
+// Creates a folder at a path, together with the parents that do not exist.
+// Creating a folder that already exists is not an error: it returns its id.
+export function createFolder(path: string) {
+  return request<{ id: number }>(ENDPOINTS.folders, {
+    method: "POST",
+    body: { path },
+  });
+}
