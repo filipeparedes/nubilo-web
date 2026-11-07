@@ -25,3 +25,9 @@ export function createFolder(path: string) {
     body: { path },
   });
 }
+
+// Deletes a folder together with everything inside it, at any depth. It is
+// permanent.
+export function deleteFolder(id: number) {
+  return request<void>(ENDPOINTS.folder(id), { method: "DELETE" });
+}
