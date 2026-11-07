@@ -57,26 +57,47 @@ function baseColumns(
 
 interface FileTableProps {
   entries: Entry[];
+  // Called with the folder when its name is pressed. Without it the folder
+  // names are plain text.
+  onOpenFolder?: (folder: FolderInfo) => void;
   // Called with the file when its get button is pressed.
   onDownload?: (file: FileInfo) => void;
   // Called with the file when its del button is pressed.
   onDelete?: (file: FileInfo) => void;
-  // Called with the folder when its name is pressed. Without it the
-  // folder names are plain text.
-  onOpenFolder?: (folder: FolderInfo) => void;
+  // Called with the folder when its del button is pressed.
+  onDeleteFolder?: (folder: FolderInfo) => void;
 }
 
-// The column with the action buttons. Folders have no action yet. Only
-// the buttons whose callback was given are drawn.
+// The column with the action buttons. A file has get and del, a folder has
+// only del. Only the buttons whose callback was given are drawn.
 function actionsColumn({
   onDownload,
   onDelete,
-}: Pick<FileTableProps, "onDownload" | "onDelete">): Column<Entry> {
+  onDeleteFolder,
+}: Pick<
+  FileTableProps,
+  "onDownload" | "onDelete" | "onDeleteFolder"
+>): Column<Entry> {
   return {
     header: "ACTIONS",
     width: "140px",
-    render: (entry) =>
-      entry.kind === "file" ? (
+    render: (entry) => {
+      if (entry.kind === "folder") {
+        return onDeleteFolder ? (
+          <span className="flex gap-4">
+            {/* Takes the place of the get button, so the del buttons line up. */}
+            {onDownload && (
+              <span className="invisible" aria-hidden="true">
+                [ get ]
+              </span>
+            )}
+            <Button tone="danger" onClick={() => onDeleteFolder(entry)}>
+              del
+            </Button>
+          </span>
+        ) : null;
+      }
+      return (
         <span className="flex gap-4">
           {onDownload && <Button onClick={() => onDownload(entry)}>get</Button>}
           {onDelete && (
@@ -85,7 +106,8 @@ function actionsColumn({
             </Button>
           )}
         </span>
-      ) : null,
+      );
+    },
   };
 }
 
@@ -96,11 +118,12 @@ export function FileTable({
   onOpenFolder,
   onDownload,
   onDelete,
+  onDeleteFolder,
 }: FileTableProps) {
   const base = baseColumns(onOpenFolder);
   const columns =
-    onDownload || onDelete
-      ? [...base, actionsColumn({ onDownload, onDelete })]
+    onDownload || onDelete || onDeleteFolder
+      ? [...base, actionsColumn({ onDownload, onDelete, onDeleteFolder })]
       : base;
 
   return (
