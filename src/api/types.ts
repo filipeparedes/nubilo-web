@@ -22,3 +22,18 @@ export interface FolderContents {
   folders: FolderInfo[];
   files: FileInfo[];
 }
+
+// One version of a file, without its content.
+export interface VersionInfo {
+  version: number;
+  size: number;
+  contentType: string;
+  createdAt: string;
+}
+
+// The history of a file: its full path and its versions, newest first. The
+// first one is the current version.
+export interface FileVersions {
+  path: string;
+  versions: VersionInfo[];
+}
