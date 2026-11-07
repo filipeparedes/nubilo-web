@@ -62,33 +62,41 @@ interface FileTableProps {
   onOpenFolder?: (folder: FolderInfo) => void;
   // Called with the file when its get button is pressed.
   onDownload?: (file: FileInfo) => void;
+  // Called with the file when its history button is pressed.
+  onHistory?: (file: FileInfo) => void;
   // Called with the file when its del button is pressed.
   onDelete?: (file: FileInfo) => void;
   // Called with the folder when its del button is pressed.
   onDeleteFolder?: (folder: FolderInfo) => void;
 }
 
-// The column with the action buttons. A file has get and del, a folder has
-// only del. Only the buttons whose callback was given are drawn.
+// The column with the action buttons. A file has get, history and del, a
+// folder has only del. Only the buttons whose callback was given are drawn.
 function actionsColumn({
   onDownload,
+  onHistory,
   onDelete,
   onDeleteFolder,
 }: Pick<
   FileTableProps,
-  "onDownload" | "onDelete" | "onDeleteFolder"
+  "onDownload" | "onHistory" | "onDelete" | "onDeleteFolder"
 >): Column<Entry> {
   return {
     header: "ACTIONS",
-    width: "140px",
+    width: "250px",
     render: (entry) => {
       if (entry.kind === "folder") {
         return onDeleteFolder ? (
           <span className="flex gap-4">
-            {/* Takes the place of the get button, so the del buttons line up. */}
+            {/* These take the place of the file buttons, so the del buttons line up. */}
             {onDownload && (
               <span className="invisible" aria-hidden="true">
                 [ get ]
+              </span>
+            )}
+            {onHistory && (
+              <span className="invisible" aria-hidden="true">
+                [ history ]
               </span>
             )}
             <Button tone="danger" onClick={() => onDeleteFolder(entry)}>
@@ -100,6 +108,9 @@ function actionsColumn({
       return (
         <span className="flex gap-4">
           {onDownload && <Button onClick={() => onDownload(entry)}>get</Button>}
+          {onHistory && (
+            <Button onClick={() => onHistory(entry)}>history</Button>
+          )}
           {onDelete && (
             <Button tone="danger" onClick={() => onDelete(entry)}>
               del
@@ -117,13 +128,17 @@ export function FileTable({
   entries,
   onOpenFolder,
   onDownload,
+  onHistory,
   onDelete,
   onDeleteFolder,
 }: FileTableProps) {
   const base = baseColumns(onOpenFolder);
   const columns =
-    onDownload || onDelete || onDeleteFolder
-      ? [...base, actionsColumn({ onDownload, onDelete, onDeleteFolder })]
+    onDownload || onHistory || onDelete || onDeleteFolder
+      ? [
+          ...base,
+          actionsColumn({ onDownload, onHistory, onDelete, onDeleteFolder }),
+        ]
       : base;
 
   return (

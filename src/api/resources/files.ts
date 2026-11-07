@@ -1,5 +1,6 @@
 import { request } from "../client";
 import { ENDPOINTS } from "../endpoints";
+import type { FileVersions } from "../types";
 
 // Stores a file at a path. If the path already holds a file, the content
 // becomes a new version of it.
@@ -21,4 +22,9 @@ export function downloadFile(id: number) {
 // Deletes a file together with all its versions.
 export function deleteFile(id: number) {
   return request<void>(ENDPOINTS.file(id), { method: "DELETE" });
+}
+
+// The versions of a file, newest first, with the path of the file.
+export function getVersions(fileId: number) {
+  return request<FileVersions>(ENDPOINTS.versions(fileId));
 }

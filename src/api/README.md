@@ -12,9 +12,9 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 | `errorMessage.ts`      | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                        |
 | `resources/auth.ts`    | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
 | `resources/health.ts`  | The health check: `getHealth`.                                                                                                                                                                                              |
-| `resources/files.ts`   | The file calls: `uploadFile`, `downloadFile` and `deleteFile`.                                                                                                                                                              |
-| `resources/folders.ts` | The folders: the contents of the root (`getRootContents`) and of a folder (`getFolderContents`), the list of every folder (`getFolders`), `createFolder` and `deleteFolder`. |
-| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`, which also carries the `path` of the folder that was listed.                                                                           |
+| `resources/files.ts`   | The file calls: `uploadFile`, `downloadFile`, `deleteFile` and `getVersions` (the history of a file).                                                                                                                       |
+| `resources/folders.ts` | The folders: the contents of the root (`getRootContents`) and of a folder (`getFolderContents`), the list of every folder (`getFolders`), `createFolder` and `deleteFolder`.                                                |
+| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo`, `FolderContents` (which also carries the `path` of the folder that was listed), `VersionInfo` and `FileVersions` (the path of a file and its versions).     |
 
 ## How it works
 

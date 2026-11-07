@@ -118,6 +118,7 @@ export default function HomePage() {
               removeFolder.reset();
               setFolderToDelete(folder);
             }}
+            onHistory={(file) => navigate(routeTo.history(file.id))}
           />
         </>
       )}
