@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteFolder } from "../api/resources/folders";
+import { deleteFolder } from "../../api/resources/folders";
 
 // Deletes a folder with everything inside it. When it succeeds every listing
 // and the folder tree are refreshed, so the folder disappears.

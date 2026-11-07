@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { uploadFile } from "../api/resources/files";
+import { uploadFile } from "../../api/resources/files";
 
 // Uploads a file. When it succeeds every listing is refreshed, since the
 // query keys of the listings start with "folder".

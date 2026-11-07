@@ -1,8 +1,8 @@
-import type { VersionInfo } from "../api/types";
-import { formatDate, formatSize } from "../utils/format";
-import type { Column } from "./DataTable";
-import { DataTable } from "./DataTable";
-import { EmptyState } from "./EmptyState";
+import type { VersionInfo } from "../../api/types";
+import { formatDate, formatSize } from "../../utils/format";
+import type { Column } from "../ui/DataTable";
+import { DataTable } from "../ui/DataTable";
+import { EmptyState } from "../ui/EmptyState";
 
 // The current version is marked, so the user can tell it from the old ones.
 function columns(currentVersion: number): Column<VersionInfo>[] {

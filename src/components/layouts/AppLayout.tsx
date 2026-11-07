@@ -1,14 +1,14 @@
 import { Outlet, useMatch, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import { useHealth } from "../../hooks/useHealth";
-import { Button } from "../Button";
-import { RuleTitle } from "../RuleTitle";
-import { Wordmark } from "../Wordmark";
+import { useAuth } from "../../hooks/app/useAuth";
+import { useHealth } from "../../hooks/app/useHealth";
+import { Button } from "../ui/Button";
+import { RuleTitle } from "../ui/RuleTitle";
+import { Wordmark } from "../ui/Wordmark";
 import { errorMessage } from "../../api/errorMessage";
-import { useFolders } from "../../hooks/useFolders";
+import { useFolders } from "../../hooks/folders/useFolders";
 import { ROUTES, routeTo } from "../../routes";
-import { FileExplorer } from "../FileExplorer";
-import { StatusLine } from "../StatusLine";
+import { FileExplorer } from "../files/FileExplorer";
+import { StatusLine } from "../ui/StatusLine";
 
 // Shell of the app after login: top bar, command bar, side panel, the
 // area where each screen is drawn (<Outlet />) and the status bar.

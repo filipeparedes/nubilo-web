@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { errorMessage } from "../api/errorMessage";
-import { Button } from "../components/Button";
-import { StatusLine } from "../components/StatusLine";
-import { VersionTable } from "../components/VersionTable";
-import { useFileVersions } from "../hooks/useFileVersions";
-import { useGoBack } from "../hooks/useGoBack";
+import { Button } from "../components/ui/Button";
+import { StatusLine } from "../components/ui/StatusLine";
+import { VersionTable } from "../components/files/VersionTable";
+import { useFileVersions } from "../hooks/files/useFileVersions";
+import { useGoBack } from "../hooks/app/useGoBack";
 
 // The history of a file: every version it has had, newest first.
 export default function HistoryPage() {

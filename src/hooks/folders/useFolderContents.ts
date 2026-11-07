@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFolderContents, getRootContents } from "../api/resources/folders";
+import { getFolderContents, getRootContents } from "../../api/resources/folders";
 
 // The contents of a folder, or of the root when no id is given. The query
 // key starts with "folder", so after an upload or a delete a single

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { errorMessage } from "../api/errorMessage";
-import { joinPath } from "../utils/format";
+import { errorMessage } from "../../api/errorMessage";
+import { joinPath } from "../../utils/format";
 import { useUploadFile } from "./useUploadFile";
 
 export interface UploadItem {

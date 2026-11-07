@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { downloadVersion } from "../api/resources/files";
-import { saveBlob } from "../utils/download";
-import { baseName, versionedName } from "../utils/format";
+import { downloadVersion } from "../../api/resources/files";
+import { saveBlob } from "../../utils/download";
+import { baseName, versionedName } from "../../utils/format";
 
 // Downloads one version of a file and saves it on the user's computer, named
 // after the file with the version in it ("notes-v2.txt"). Nothing changes on

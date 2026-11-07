@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTES } from "../routes";
+import { ROUTES } from "../../routes";
 
 // Returns a function that goes back to the previous page, or to the home
 // page when the current one was opened directly and there is nowhere to go
