@@ -12,6 +12,7 @@ import { FileTable } from "../components/FileTable";
 import type { Entry } from "../utils/entries";
 import { FileDropZone } from "../components/FileDropZone";
 import { FileExplorer } from "../components/FileExplorer";
+import { VersionTable } from "../components/VersionTable";
 
 interface Row {
   id: number;
@@ -128,6 +129,29 @@ export default function ComponentsPage() {
         activeFolderId={2}
         onOpenRoot={() => {}}
         onOpenFolder={() => {}}
+      />
+
+      <VersionTable
+        versions={[
+          {
+            version: 3,
+            size: 18841,
+            contentType: "text/plain",
+            createdAt: "2026-04-08T16:42:00Z",
+          },
+          {
+            version: 2,
+            size: 18102,
+            contentType: "text/plain",
+            createdAt: "2026-04-05T11:20:00Z",
+          },
+          {
+            version: 1,
+            size: 9120,
+            contentType: "text/plain",
+            createdAt: "2026-04-01T10:00:00Z",
+          },
+        ]}
       />
     </main>
   );
