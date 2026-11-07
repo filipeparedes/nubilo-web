@@ -13,8 +13,8 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 | `resources/auth.ts`    | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
 | `resources/health.ts`  | The health check: `getHealth`.                                                                                                                                                                                              |
 | `resources/files.ts`   | The file calls: `uploadFile`, `downloadFile` and `deleteFile`.                                                                                                                                                              |
-| `resources/folders.ts` | The contents of the root and of a folder.                                                                                                                                                                                   |
-| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`.                                                                                                                                        |
+| `resources/folders.ts` | The folders: the contents of the root (`getRootContents`) and of a folder (`getFolderContents`), and the list of every folder (`getFolders`).                                                                               |
+| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo` and `FolderContents`, which also carries the `path` of the folder that was listed.                                                                           |
 
 ## How it works
 
