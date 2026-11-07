@@ -16,5 +16,6 @@ export const ENDPOINTS = {
     `/files/${id}/versions/${version}/restore`,
 
   folders: "/folders",
+  rootContents: "/root-contents",
   folder: (id: number) => `/folders/${id}`,
 } as const;

@@ -15,8 +15,10 @@ export interface FolderInfo {
   createdAt: string;
 }
 
-// What a folder holds directly: its subfolders and its files.
+// What a folder holds directly: its subfolders and its files. `path` is
+// the full path of the folder itself, and an empty string for the root.
 export interface FolderContents {
+  path: string;
   folders: FolderInfo[];
   files: FileInfo[];
 }

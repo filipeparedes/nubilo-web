@@ -4,12 +4,13 @@ One file per screen of the app. A page is routed in `App.tsx` and composes the c
 
 ## Structure
 
-| File                 | Role                                                                                                                                                                                      |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LoginPage.tsx`      | Email and password form. Calls `login()` and shows the error of the backend. A logged-in user is sent home.                                                                               |
-| `RegisterPage.tsx`   | Email, password and confirmation. Checks that the two passwords match, creates the account and logs in.                                                                                   |
-| `ComponentsPage.tsx` | Development-only sandbox, available at `/components` with `npm run dev`. It is not part of the app.                                                                                       |
-| `HomePage.tsx`       | The root of the storage: the files and folders in a table, with a filter, a refresh button and a button to the upload page. Each file can be downloaded or deleted, after a confirmation. |
+| File                 | Role                                                                                                                                                                                                                                                                                                                    |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LoginPage.tsx`      | Email and password form. Calls `login()` and shows the error of the backend. A logged-in user is sent home.                                                                                                                                                                                                             |
+| `RegisterPage.tsx`   | Email, password and confirmation. Checks that the two passwords match, creates the account and logs in.                                                                                                                                                                                                                 |
+| `ComponentsPage.tsx` | Development-only sandbox, available at `/components` with `npm run dev`. It is not part of the app.                                                                                                                                                                                                                     |
+| `HomePage.tsx`       | The root of the storage, or the folder whose id is in the address (`/folders/:folderId`): the files and folders in a table, with the path of the folder, a filter, a refresh button and a button to the upload page. A folder name opens that folder, and each file can be downloaded or deleted, after a confirmation. |
+| `UploadPage.tsx`     | Upload of one or more files, with an optional target folder, and the result of each file. `cancel` goes back to the previous page.                                                                                                                                                                                      |
 
 ## How it works
 

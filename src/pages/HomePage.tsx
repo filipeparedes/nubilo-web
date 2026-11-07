@@ -6,8 +6,8 @@ import { FilterBar } from "../components/FilterBar";
 import { StatusLine } from "../components/StatusLine";
 import { useFolderContents } from "../hooks/useFolderContents";
 import { toEntries } from "../utils/entries";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../routes";
+import { useNavigate, useParams } from "react-router-dom";
+import { ROUTES, routeTo } from "../routes";
 import { useDownloadFile } from "../hooks/useDownloadFile";
 import { useDeleteFile } from "../hooks/useDeleteFile";
 import type { FileInfo } from "../api/types";
@@ -16,8 +16,14 @@ import { baseName } from "../utils/format";
 
 // The root of the user's storage.
 export default function HomePage() {
-  const { data, isPending, error, refetch } = useFolderContents();
-  const [filter, setFilter] = useState("");
+  const { folderId: param } = useParams();
+  const folderId = param === undefined ? undefined : Number(param);
+
+  const { data, isPending, error, refetch } = useFolderContents(folderId);
+  // The filter belongs to the folder where it was typed, so it does not
+  // follow the user into the next folder.
+  const [typed, setTyped] = useState({ folderId, text: "" });
+  const filter = typed.folderId === folderId ? typed.text : "";
   const [toDelete, setToDelete] = useState<FileInfo | null>(null); //file waiting to deletion confirmed
 
   const navigate = useNavigate();
@@ -38,7 +44,9 @@ export default function HomePage() {
           <p className="text-[9px] tracking-[.15em] text-accent-dim">
             CURRENT DIRECTORY
           </p>
-          <h1 className="text-lg font-medium text-accent">/</h1>
+          <h1 className="text-lg font-medium text-accent">
+            {data ? `/${data.path}` : "..."}
+          </h1>
         </div>
         <div className="flex gap-4">
           <Button onClick={() => navigate(ROUTES.upload)}>upload</Button>
@@ -57,11 +65,12 @@ export default function HomePage() {
         <>
           <FilterBar
             value={filter}
-            onChange={setFilter}
+            onChange={(text) => setTyped({ folderId, text })}
             count={entries.length}
           />
           <FileTable
             entries={entries}
+            onOpenFolder={(folder) => navigate(routeTo.folder(folder.id))}
             onDownload={(file) => download.mutate(file)}
             onDelete={(file) => {
               remove.reset();
