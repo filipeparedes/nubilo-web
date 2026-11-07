@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
+import HistoryPage from "./pages/HistoryPage";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path={ROUTES.home} element={<HomePage />} />
           <Route path={ROUTES.folder} element={<HomePage />} />
           <Route path={ROUTES.upload} element={<UploadPage />} />
+          <Route path={ROUTES.history} element={<HistoryPage />} />
         </Route>
       </Route>
       {import.meta.env.DEV && (
