@@ -1,13 +1,12 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Field } from "../components/Field";
 import { FileDropZone } from "../components/FileDropZone";
 import { RuleTitle } from "../components/RuleTitle";
 import { useUploadFiles } from "../hooks/useUploadFiles";
 import type { UploadItem } from "../hooks/useUploadFiles";
-import { ROUTES } from "../routes";
+import { useGoBack } from "../hooks/useGoBack";
 
 const STYLES: Record<UploadItem["status"], string> = {
   pending: "text-accent-dim",
@@ -29,15 +28,8 @@ export default function UploadPage() {
   const { items, running, start } = useUploadFiles();
   const [files, setFiles] = useState<File[]>([]);
   const [folder, setFolder] = useState("");
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  // Back to where the user came from, or to the home page when /upload was
-  // opened directly and there is nowhere to go back to.
-  function cancel() {
-    if (location.key === "default") navigate(ROUTES.home);
-    else navigate(-1);
-  }
+  const cancel = useGoBack();
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
