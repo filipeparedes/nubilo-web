@@ -4,11 +4,11 @@ The custom hooks of the app. Hooks that read data from the server use TanStack Q
 
 ## Structure
 
-| Folder     | What it holds                                              |
-| ---------- | ---------------------------------------------------------- |
+| Folder     | What it holds                                                         |
+| ---------- | --------------------------------------------------------------------- |
 | `app/`     | The hooks of the app itself: the session, the API and the navigation. |
-| `files/`   | The hooks that work on files and on their versions.        |
-| `folders/` | The hooks that work on folders.                            |
+| `files/`   | The hooks that work on files and on their versions.                   |
+| `folders/` | The hooks that work on folders.                                       |
 
 ### app/
 

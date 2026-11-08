@@ -4,11 +4,11 @@ The reusable pieces of the interface. They take their look and behavior from pro
 
 ## Structure
 
-| Folder     | What it holds                                                              |
-| ---------- | -------------------------------------------------------------------------- |
-| `ui/`      | The generic pieces. They know nothing about files or folders.              |
-| `files/`   | The pieces made for files and folders, built on the ones in `ui/`.         |
-| `layouts/` | The shells that wrap the pages (see its README).                           |
+| Folder     | What it holds                                                      |
+| ---------- | ------------------------------------------------------------------ |
+| `ui/`      | The generic pieces. They know nothing about files or folders.      |
+| `files/`   | The pieces made for files and folders, built on the ones in `ui/`. |
+| `layouts/` | The shells that wrap the pages (see its README).                   |
 
 ### ui/
 
