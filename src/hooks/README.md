@@ -20,15 +20,17 @@ The custom hooks of the app. Hooks that read data from the server use TanStack Q
 
 ### files/
 
-| File                    | Role                                                                                                                                              |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `useUploadFile.ts`      | Uploads one file to a path. When it succeeds it refreshes every listing.                                                                          |
-| `useUploadFiles.ts`     | Uploads several files, one request per file and one after the other. Each file keeps its own status: pending, uploading, done or error.           |
-| `useDownloadFile.ts`    | Downloads a file and saves it on the user's computer under its own name.                                                                          |
-| `useDownloadVersion.ts` | Downloads one version of a file and saves it with the version in the name, for example `notes-v2.txt`.                                            |
-| `useDeleteFile.ts`      | Deletes a file with all its versions. When it succeeds it refreshes every listing.                                                                |
-| `useFileVersions.ts`    | The history of a file: its path and its versions, newest first. Its query key starts with "versions", so the restore of a version can refresh it. |
-| `useRestoreVersion.ts`  | Restores an old version of a file by adding a new version with its content. When it succeeds the history and the listings are refreshed.          |
+| File                    | Role                                                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `useUploadFile.ts`      | Uploads one file to a path. When it succeeds it refreshes every listing.                                                                                |
+| `useUploadFiles.ts`     | Uploads several files, one request per file and one after the other. Each file keeps its own status: pending, uploading, done or error.                 |
+| `useDownloadFile.ts`    | Downloads a file and saves it on the user's computer under its own name.                                                                                |
+| `useDownloadVersion.ts` | Downloads one version of a file and saves it with the version in the name, for example `notes-v2.txt`.                                                  |
+| `useDeleteFile.ts`      | Deletes a file with all its versions. When it succeeds it refreshes every listing.                                                                      |
+| `useFileVersions.ts`    | The history of a file: its path and its versions, newest first. Its query key starts with "versions", so the restore of a version can refresh it.       |
+| `useRestoreVersion.ts`  | Restores an old version of a file by adding a new version with its content. When it succeeds the history and the listings are refreshed.                |
+| `useCompareVersions.ts` | The chunk-level summary of the difference between two versions of a file, from the backend. It runs once both versions are chosen.                      |
+| `useVersionDiff.ts`     | Downloads two versions of a file and compares their text line by line. A file that is not text, or is too big, answers with the reason instead of rows. |
 
 ### folders/
 

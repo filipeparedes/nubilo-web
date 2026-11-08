@@ -4,14 +4,14 @@ One file per screen of the app. A page is routed in `App.tsx` and composes the c
 
 ## Structure
 
-| File                 | Role                                                                                                                                                                                                                    |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LoginPage.tsx`      | Email and password form. Calls `login()` and shows the error of the backend. A logged-in user is sent home.                                                                                                             |
-| `RegisterPage.tsx`   | Email, password and confirmation. Checks that the two passwords match, creates the account and logs in.                                                                                                                 |
-| `ComponentsPage.tsx` | Development-only sandbox, available at `/components` with `npm run dev`. It is not part of the app.                                                                                                                     |
-| `HomePage.tsx`       | The root of the storage, or the folder whose id is in the address (`/folders/:folderId`).                                                                                                                               |
-| `UploadPage.tsx`     | Upload of one or more files, with an optional target folder, and the result of each file. `cancel` goes back to the previous page.                                                                                      |
-| `HistoryPage.tsx`    | The history of the file in the address (`/files/:fileId/history`): the path of the file and a table with its versions, with refresh and back buttons. Each version can be downloaded or restored, after a confirmation. |
+| File                 | Role                                                                                                                                                                                                                                                                              |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LoginPage.tsx`      | Email and password form. Calls `login()` and shows the error of the backend. A logged-in user is sent home.                                                                                                                                                                       |
+| `RegisterPage.tsx`   | Email, password and confirmation. Checks that the two passwords match, creates the account and logs in.                                                                                                                                                                           |
+| `ComponentsPage.tsx` | Development-only sandbox, available at `/components` with `npm run dev`. It is not part of the app.                                                                                                                                                                               |
+| `HomePage.tsx`       | The root of the storage, or the folder whose id is in the address (`/folders/:folderId`).                                                                                                                                                                                         |
+| `UploadPage.tsx`     | Upload of one or more files, with an optional target folder, and the result of each file. `cancel` goes back to the previous page.                                                                                                                                                |
+| `HistoryPage.tsx`    | The history of the file in the address (`/files/:fileId/history`): the path of the file and a table with its versions, with refresh and back buttons. Each version can be downloaded or restored, after a confirmation, and two versions can be picked and compared side by side. |
 
 ## How it works
 
