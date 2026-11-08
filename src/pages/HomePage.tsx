@@ -7,7 +7,7 @@ import { StatusLine } from "../components/ui/StatusLine";
 import { useFolderContents } from "../hooks/folders/useFolderContents";
 import { toEntries } from "../utils/entries";
 import { useNavigate, useParams } from "react-router-dom";
-import { ROUTES, routeTo } from "../routes";
+import { routeTo } from "../routes";
 import { useDownloadFile } from "../hooks/files/useDownloadFile";
 import { useDeleteFile } from "../hooks/files/useDeleteFile";
 import type { FileInfo, FolderInfo } from "../api/types";
