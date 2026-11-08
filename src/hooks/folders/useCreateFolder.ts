@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createFolder } from "../api/resources/folders";
+import { createFolder } from "../../api/resources/folders";
 
 // Creates a folder at a path. When it succeeds every listing and the folder
 // tree are refreshed, so the new folder shows up.

@@ -2,10 +2,10 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Navigate } from "react-router-dom";
 import { ApiError } from "../api/client";
-import { useAuth } from "../hooks/useAuth";
-import { Button } from "../components/Button";
-import { Field } from "../components/Field";
-import { StatusLine } from "../components/StatusLine";
+import { useAuth } from "../hooks/app/useAuth";
+import { Button } from "../components/ui/Button";
+import { Field } from "../components/ui/Field";
+import { StatusLine } from "../components/ui/StatusLine";
 import { ROUTES } from "../routes";
 import { errorMessage } from "../api/errorMessage";
 

@@ -27,3 +27,11 @@ export function joinPath(folder: string, name: string): string {
   const clean = folder.trim().replace(/^\/+|\/+$/g, "");
   return clean ? `${clean}/${name}` : name;
 }
+
+// A file name with the version before the extension: ("notes.txt", 2)
+// becomes "notes-v2.txt". A name without an extension just gets the suffix.
+export function versionedName(name: string, version: number): string {
+  const dot = name.lastIndexOf(".");
+  if (dot <= 0) return `${name}-v${version}`;
+  return `${name.slice(0, dot)}-v${version}${name.slice(dot)}`;
+}

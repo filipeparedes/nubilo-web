@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHealth } from "../api/resources/health";
+import { getHealth } from "../../api/resources/health";
 
 // The state of the API, checked again every 10 seconds. `isSuccess` means
 // online, `isError` means offline, and `data.latencyMs` is how long the

@@ -1,16 +1,19 @@
 import { useParams } from "react-router-dom";
 import { errorMessage } from "../api/errorMessage";
-import { Button } from "../components/Button";
-import { StatusLine } from "../components/StatusLine";
-import { VersionTable } from "../components/VersionTable";
-import { useFileVersions } from "../hooks/useFileVersions";
-import { useGoBack } from "../hooks/useGoBack";
+import { Button } from "../components/ui/Button";
+import { StatusLine } from "../components/ui/StatusLine";
+import { VersionTable } from "../components/files/VersionTable";
+import { useFileVersions } from "../hooks/files/useFileVersions";
+import { useGoBack } from "../hooks/app/useGoBack";
+import { useDownloadVersion } from "../hooks/files/useDownloadVersion";
 
 // The history of a file: every version it has had, newest first.
 export default function HistoryPage() {
   const { fileId: param } = useParams();
   const goBack = useGoBack();
-  const { data, isPending, error, refetch } = useFileVersions(Number(param));
+  const fileId = Number(param);
+  const { data, isPending, error, refetch } = useFileVersions(fileId);
+  const download = useDownloadVersion();
 
   return (
     <>
@@ -33,7 +36,21 @@ export default function HistoryPage() {
 
       {isPending && <StatusLine tone="muted">loading...</StatusLine>}
       {error && <StatusLine>{errorMessage(error)}</StatusLine>}
-      {data && <VersionTable versions={data.versions} />}
+      {download.error && (
+        <StatusLine>{errorMessage(download.error)}</StatusLine>
+      )}
+      {data && (
+        <VersionTable
+          versions={data.versions}
+          onDownload={(version) =>
+            download.mutate({
+              fileId,
+              path: data.path,
+              version: version.version,
+            })
+          }
+        />
+      )}
     </>
   );
 }

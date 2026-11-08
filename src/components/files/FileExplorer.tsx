@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import type { FolderInfo } from "../api/types";
-import { ancestorIds, buildTree } from "../utils/tree";
-import type { FolderNode } from "../utils/tree";
-import { Button } from "./Button";
+import type { FolderInfo } from "../../api/types";
+import { ancestorIds, buildTree } from "../../utils/tree";
+import type { FolderNode } from "../../utils/tree";
+import { Button } from "../ui/Button";
 
 interface FileExplorerProps {
   folders: FolderInfo[];

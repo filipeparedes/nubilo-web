@@ -1,10 +1,10 @@
-import type { Entry } from "../utils/entries";
-import { baseName, formatDate, formatSize } from "../utils/format";
-import type { Column } from "./DataTable";
-import { DataTable } from "./DataTable";
-import { EmptyState } from "./EmptyState";
-import type { FileInfo, FolderInfo } from "../api/types";
-import { Button } from "./Button";
+import type { Entry } from "../../utils/entries";
+import { baseName, formatDate, formatSize } from "../../utils/format";
+import type { Column } from "../ui/DataTable";
+import { DataTable } from "../ui/DataTable";
+import { EmptyState } from "../ui/EmptyState";
+import type { FileInfo, FolderInfo } from "../../api/types";
+import { Button } from "../ui/Button";
 
 function baseColumns(
   onOpenFolder?: (folder: FolderInfo) => void,

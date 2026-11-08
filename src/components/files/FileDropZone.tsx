@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import type { InputHTMLAttributes } from "react";
-import { formatSize } from "../utils/format";
+import { formatSize } from "../../utils/format";
 
 interface FileDropZoneProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,

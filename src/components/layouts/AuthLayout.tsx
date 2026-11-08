@@ -1,8 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes";
-import { Button } from "../Button";
-import { RuleTitle } from "../RuleTitle";
-import { Wordmark } from "../Wordmark";
+import { Button } from "../ui/Button";
+import { RuleTitle } from "../ui/RuleTitle";
+import { Wordmark } from "../ui/Wordmark";
 
 const CLOUD = `    .--.
     .--(    )--.

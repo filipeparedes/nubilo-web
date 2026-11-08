@@ -1,12 +1,12 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Button } from "../components/Button";
-import { Field } from "../components/Field";
-import { FileDropZone } from "../components/FileDropZone";
-import { RuleTitle } from "../components/RuleTitle";
-import { useUploadFiles } from "../hooks/useUploadFiles";
-import type { UploadItem } from "../hooks/useUploadFiles";
-import { useGoBack } from "../hooks/useGoBack";
+import { Button } from "../components/ui/Button";
+import { Field } from "../components/ui/Field";
+import { FileDropZone } from "../components/files/FileDropZone";
+import { RuleTitle } from "../components/ui/RuleTitle";
+import { useUploadFiles } from "../hooks/files/useUploadFiles";
+import type { UploadItem } from "../hooks/files/useUploadFiles";
+import { useGoBack } from "../hooks/app/useGoBack";
 
 const STYLES: Record<UploadItem["status"], string> = {
   pending: "text-accent-dim",

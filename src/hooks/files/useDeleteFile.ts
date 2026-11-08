@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteFile } from "../api/resources/files";
+import { deleteFile } from "../../api/resources/files";
 
 // Deletes a file with all its versions. When it succeeds every listing is
 // refreshed, so the row disappears.

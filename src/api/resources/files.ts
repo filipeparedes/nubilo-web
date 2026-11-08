@@ -28,3 +28,8 @@ export function deleteFile(id: number) {
 export function getVersions(fileId: number) {
   return request<FileVersions>(ENDPOINTS.versions(fileId));
 }
+
+// Downloads the content of one version of a file.
+export function downloadVersion(fileId: number, version: number) {
+  return request<Blob>(ENDPOINTS.version(fileId, version), { as: "blob" });
+}

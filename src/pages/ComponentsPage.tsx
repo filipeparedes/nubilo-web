@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { Button } from "../components/Button";
-import { Field } from "../components/Field";
-import { Modal } from "../components/Modal";
-import { RuleTitle } from "../components/RuleTitle";
-import { StatusLine } from "../components/StatusLine";
-import { Wordmark } from "../components/Wordmark";
-import type { Column } from "../components/DataTable";
-import { DataTable } from "../components/DataTable";
-import { EmptyState } from "../components/EmptyState";
-import { FileTable } from "../components/FileTable";
+import { Button } from "../components/ui/Button";
+import { Field } from "../components/ui/Field";
+import { Modal } from "../components/ui/Modal";
+import { RuleTitle } from "../components/ui/RuleTitle";
+import { StatusLine } from "../components/ui/StatusLine";
+import { Wordmark } from "../components/ui/Wordmark";
+import type { Column } from "../components/ui/DataTable";
+import { DataTable } from "../components/ui/DataTable";
+import { EmptyState } from "../components/ui/EmptyState";
+import { FileTable } from "../components/files/FileTable";
 import type { Entry } from "../utils/entries";
-import { FileDropZone } from "../components/FileDropZone";
-import { FileExplorer } from "../components/FileExplorer";
-import { VersionTable } from "../components/VersionTable";
+import { FileDropZone } from "../components/files/FileDropZone";
+import { FileExplorer } from "../components/files/FileExplorer";
+import { VersionTable } from "../components/files/VersionTable";
 
 interface Row {
   id: number;

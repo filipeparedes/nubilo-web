@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { errorMessage } from "../api/errorMessage";
-import { Button } from "../components/Button";
-import { FileTable } from "../components/FileTable";
-import { FilterBar } from "../components/FilterBar";
-import { StatusLine } from "../components/StatusLine";
-import { useFolderContents } from "../hooks/useFolderContents";
+import { Button } from "../components/ui/Button";
+import { FileTable } from "../components/files/FileTable";
+import { FilterBar } from "../components/ui/FilterBar";
+import { StatusLine } from "../components/ui/StatusLine";
+import { useFolderContents } from "../hooks/folders/useFolderContents";
 import { toEntries } from "../utils/entries";
 import { useNavigate, useParams } from "react-router-dom";
 import { ROUTES, routeTo } from "../routes";
-import { useDownloadFile } from "../hooks/useDownloadFile";
-import { useDeleteFile } from "../hooks/useDeleteFile";
+import { useDownloadFile } from "../hooks/files/useDownloadFile";
+import { useDeleteFile } from "../hooks/files/useDeleteFile";
 import type { FileInfo, FolderInfo } from "../api/types";
-import { Modal } from "../components/Modal";
+import { Modal } from "../components/ui/Modal";
 import { baseName, joinPath } from "../utils/format";
 import type { FormEvent } from "react";
-import { Field } from "../components/Field";
-import { useCreateFolder } from "../hooks/useCreateFolder";
-import { useDeleteFolder } from "../hooks/useDeleteFolder";
+import { Field } from "../components/ui/Field";
+import { useCreateFolder } from "../hooks/folders/useCreateFolder";
+import { useDeleteFolder } from "../hooks/folders/useDeleteFolder";
 
 // The root of the user's storage.
 export default function HomePage() {
