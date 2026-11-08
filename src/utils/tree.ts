@@ -49,3 +49,17 @@ export function ancestorIds(folders: FolderInfo[], folderId: number): number[] {
   }
   return ids;
 }
+
+// The path shown for the open folder: "/" for the root, "/docs/2026" for a
+// folder, "..." while the folders are loading and "-" on a page that is not
+// a folder. activeFolderId is null for the root and undefined when no folder
+// is open.
+export function displayPath(
+  folders: FolderInfo[] | undefined,
+  activeFolderId: number | null | undefined,
+): string {
+  if (activeFolderId === undefined) return "-";
+  if (activeFolderId === null) return "/";
+  const folder = folders?.find((candidate) => candidate.id === activeFolderId);
+  return folder ? `/${folder.path}` : "...";
+}
