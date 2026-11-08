@@ -9,7 +9,7 @@ describe("decodeText", () => {
 
   it("decodes UTF-8 with accents", () => {
     // "ção" in UTF-8
-    const bytes = Uint8Array.from([0x63, 0xc3, 0xa7, 0xc3, 0xa3, 0x6f]);
+    const bytes = Uint8Array.from([0xc3, 0xa7, 0xc3, 0xa3, 0x6f]);
     expect(decodeText(bytes)).toBe("ção");
   });
 
@@ -29,7 +29,9 @@ describe("decodeText", () => {
   });
 
   it("answers null for the start of a PNG image", () => {
-    const bytes = Uint8Array.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+    const bytes = Uint8Array.from([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+    ]);
     expect(decodeText(bytes)).toBeNull();
   });
 });
