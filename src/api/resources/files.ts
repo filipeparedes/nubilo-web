@@ -1,6 +1,6 @@
 import { request } from "../client";
 import { ENDPOINTS } from "../endpoints";
-import type { FileVersions } from "../types";
+import type { FileVersions, VersionComparison } from "../types";
 
 // Stores a file at a path. If the path already holds a file, the content
 // becomes a new version of it.
@@ -42,4 +42,12 @@ export function restoreVersion(fileId: number, version: number) {
     ENDPOINTS.restore(fileId, version),
     { method: "POST" },
   );
+}
+
+// Compares two versions of a file. The answer is a summary at chunk level,
+// not the text of the differences.
+export function compareVersions(fileId: number, from: number, to: number) {
+  return request<VersionComparison>(ENDPOINTS.compare(fileId), {
+    query: { from, to },
+  });
 }
