@@ -9,6 +9,7 @@ import { useFolders } from "../../hooks/folders/useFolders";
 import { ROUTES, routeTo } from "../../routes";
 import { FileExplorer } from "../files/FileExplorer";
 import { StatusLine } from "../ui/StatusLine";
+import { displayPath } from "../../utils/tree";
 
 // Shell of the app after login: top bar, command bar, side panel, the
 // area where each screen is drawn (<Outlet />) and the status bar.
@@ -87,7 +88,10 @@ export function AppLayout() {
           USER <b className="font-semibold">{email ?? "-"}</b>
         </span>
         <span className="hidden md:inline">
-          PATH <b className="font-semibold">/</b>
+          PATH{" "}
+          <b className="font-semibold">
+            {displayPath(folders.data, activeFolderId)}
+          </b>
         </span>
         <span className="hidden overflow-hidden text-ellipsis text-center md:block">
           READY

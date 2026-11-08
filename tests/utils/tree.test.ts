@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { FolderInfo } from "../../src/api/types";
-import { ancestorIds, buildTree } from "../../src/utils/tree";
+import { ancestorIds, buildTree, displayPath } from "../../src/utils/tree";
 
 function folder(id: number, path: string): FolderInfo {
   return { id, path, createdAt: "2026-04-01T10:00:00Z" };
@@ -81,5 +81,29 @@ describe("ancestorIds", () => {
 
   it("skips a parent that is not in the list", () => {
     expect(ancestorIds([folder(1, "a/b/c")], 1)).toEqual([]);
+  });
+});
+
+describe("displayPath", () => {
+  const folders = [folder(1, "docs"), folder(2, "docs/2026")];
+
+  it("is a slash for the root", () => {
+    expect(displayPath(folders, null)).toBe("/");
+  });
+
+  it("is the path of the open folder", () => {
+    expect(displayPath(folders, 2)).toBe("/docs/2026");
+  });
+
+  it("is a dash when no folder is open", () => {
+    expect(displayPath(folders, undefined)).toBe("-");
+  });
+
+  it("is dots while the folders are loading", () => {
+    expect(displayPath(undefined, 2)).toBe("...");
+  });
+
+  it("is dots for a folder that is not in the list", () => {
+    expect(displayPath(folders, 99)).toBe("...");
   });
 });
