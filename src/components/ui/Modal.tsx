@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { Button } from "./Button";
 
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg" | "xl";
 
 const SIZES: Record<Size, string> = {
   sm: "max-w-sm",
   md: "max-w-[520px]",
   lg: "max-w-3xl",
+  xl: "max-w-6xl",
 };
 
 interface ModalProps {
