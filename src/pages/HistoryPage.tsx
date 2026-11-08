@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { errorMessage } from "../api/errorMessage";
-import { Button } from "../components/ui/Button";
-import { StatusLine } from "../components/ui/StatusLine";
-import { VersionTable } from "../components/files/VersionTable";
-import { useFileVersions } from "../hooks/files/useFileVersions";
-import { useGoBack } from "../hooks/app/useGoBack";
-import { useDownloadVersion } from "../hooks/files/useDownloadVersion";
-import { useRestoreVersion } from "../hooks/files/useRestoreVersion";
-import { useState } from "react";
 import type { VersionInfo } from "../api/types";
+import { CompareModal } from "../components/files/CompareModal";
+import { VersionTable } from "../components/files/VersionTable";
+import { Button } from "../components/ui/Button";
 import { Modal } from "../components/ui/Modal";
+import { StatusLine } from "../components/ui/StatusLine";
+import { useGoBack } from "../hooks/app/useGoBack";
+import { useCompareVersions } from "../hooks/files/useCompareVersions";
+import { useDownloadVersion } from "../hooks/files/useDownloadVersion";
+import { useFileVersions } from "../hooks/files/useFileVersions";
+import { useRestoreVersion } from "../hooks/files/useRestoreVersion";
+import { useVersionDiff } from "../hooks/files/useVersionDiff";
 import { baseName } from "../utils/format";
 
 // The history of a file: every version it has had, newest first.
@@ -24,12 +27,44 @@ export default function HistoryPage() {
   // The version waiting for the user to confirm its restore.
   const [toRestore, setToRestore] = useState<VersionInfo | null>(null);
 
+  // The versions picked to be compared (at most two), and the pair that is
+  // being compared, older first.
+  const [picked, setPicked] = useState<number[]>([]);
+  const [comparing, setComparing] = useState<{
+    from: number;
+    to: number;
+  } | null>(null);
+  const diff = useVersionDiff(
+    fileId,
+    comparing?.from ?? null,
+    comparing?.to ?? null,
+  );
+  const summary = useCompareVersions(
+    fileId,
+    comparing?.from ?? null,
+    comparing?.to ?? null,
+  );
+
   function confirmRestore() {
     if (!toRestore) return;
     restore.mutate(
       { fileId, version: toRestore.version },
       { onSettled: () => setToRestore(null) },
     );
+  }
+
+  // Picking a third version drops the one picked first.
+  function togglePick(version: VersionInfo) {
+    setPicked((current) =>
+      current.includes(version.version)
+        ? current.filter((number) => number !== version.version)
+        : [...current, version.version].slice(-2),
+    );
+  }
+
+  function openComparison() {
+    const [from, to] = [...picked].sort((a, b) => a - b);
+    setComparing({ from, to });
   }
 
   return (
@@ -44,6 +79,9 @@ export default function HistoryPage() {
           </h1>
         </div>
         <div className="flex gap-4">
+          <Button onClick={openComparison} disabled={picked.length !== 2}>
+            compare ({picked.length}/2)
+          </Button>
           <Button onClick={() => refetch()}>refresh</Button>
           <Button tone="muted" onClick={goBack}>
             back
@@ -66,6 +104,8 @@ export default function HistoryPage() {
       {data && (
         <VersionTable
           versions={data.versions}
+          selected={picked}
+          onToggleSelect={togglePick}
           onDownload={(version) =>
             download.mutate({
               fileId,
@@ -103,6 +143,17 @@ export default function HistoryPage() {
           <b className="text-accent">{baseName(data.path)}</b>? A new version is
           added with its content, and no version is deleted.
         </Modal>
+      )}
+      {comparing && data && (
+        <CompareModal
+          fileName={baseName(data.path)}
+          fromVersion={comparing.from}
+          toVersion={comparing.to}
+          diff={diff.data}
+          summary={summary.data}
+          error={diff.error ? errorMessage(diff.error) : undefined}
+          onClose={() => setComparing(null)}
+        />
       )}
     </>
   );
