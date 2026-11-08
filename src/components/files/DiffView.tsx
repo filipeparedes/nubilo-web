@@ -70,17 +70,11 @@ export function DiffView({ rows, leftLabel, rightLabel }: DiffViewProps) {
       role="table"
       aria-label="Comparison of versions"
     >
-      <div
-        className="grid grid-cols-2 bg-panel-alt text-accent"
-        role="row"
-      >
+      <div className="grid grid-cols-2 bg-panel-alt text-accent" role="row">
         <span role="columnheader" className="px-2 py-1">
           {leftLabel}
         </span>
-        <span
-          role="columnheader"
-          className="border-l border-line px-2 py-1"
-        >
+        <span role="columnheader" className="border-l border-line px-2 py-1">
           {rightLabel}
         </span>
       </div>

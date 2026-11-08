@@ -175,8 +175,7 @@ export default function ComponentsPage() {
         ]}
       />
 
-
-    <DiffView
+      <DiffView
         rows={diffTexts(diffBefore, diffAfter) ?? []}
         leftLabel="v1"
         rightLabel="v2"
