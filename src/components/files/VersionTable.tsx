@@ -33,12 +33,12 @@ function columns(
   const pick: Column<VersionInfo>[] = onToggleSelect
     ? [
         {
-          header: "PICK",
+          header: "SEL",
           width: "60px",
           render: (version) => (
             <input
               type="checkbox"
-              className="accent-accent"
+              className="terminal-check"
               checked={selected.includes(version.version)}
               onChange={() => onToggleSelect(version)}
               aria-label={`Pick v${version.version}`}
