@@ -33,3 +33,13 @@ export function getVersions(fileId: number) {
 export function downloadVersion(fileId: number, version: number) {
   return request<Blob>(ENDPOINTS.version(fileId, version), { as: "blob" });
 }
+
+// Restores an old version of a file. It does not change or remove any
+// version: it adds a new one with the content of the old one, and answers
+// with its number.
+export function restoreVersion(fileId: number, version: number) {
+  return request<{ id: number; version: number }>(
+    ENDPOINTS.restore(fileId, version),
+    { method: "POST" },
+  );
+}
