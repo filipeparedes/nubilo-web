@@ -18,7 +18,10 @@ interface VersionTableProps {
 // Without any callback the table has no actions column.
 function columns(
   currentVersion: number,
-  { onDownload, onRestore }: Pick<VersionTableProps, "onDownload" | "onRestore">,
+  {
+    onDownload,
+    onRestore,
+  }: Pick<VersionTableProps, "onDownload" | "onRestore">,
 ): Column<VersionInfo>[] {
   const base: Column<VersionInfo>[] = [
     {

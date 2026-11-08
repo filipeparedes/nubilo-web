@@ -6,6 +6,7 @@ import { VersionTable } from "../components/files/VersionTable";
 import { useFileVersions } from "../hooks/files/useFileVersions";
 import { useGoBack } from "../hooks/app/useGoBack";
 import { useDownloadVersion } from "../hooks/files/useDownloadVersion";
+import { useRestoreVersion } from "../hooks/files/useRestoreVersion";
 
 // The history of a file: every version it has had, newest first.
 export default function HistoryPage() {
@@ -14,6 +15,7 @@ export default function HistoryPage() {
   const fileId = Number(param);
   const { data, isPending, error, refetch } = useFileVersions(fileId);
   const download = useDownloadVersion();
+  const restore = useRestoreVersion();
 
   return (
     <>
@@ -39,6 +41,13 @@ export default function HistoryPage() {
       {download.error && (
         <StatusLine>{errorMessage(download.error)}</StatusLine>
       )}
+      {restore.error && <StatusLine>{errorMessage(restore.error)}</StatusLine>}
+      {restore.isSuccess && (
+        <StatusLine tone="success">
+          RESTORED :: v{restore.variables.version} is now the current version,
+          as v{restore.data.version}
+        </StatusLine>
+      )}
       {data && (
         <VersionTable
           versions={data.versions}
@@ -49,6 +58,10 @@ export default function HistoryPage() {
               version: version.version,
             })
           }
+          onRestore={(version) => {
+            if (restore.isPending) return;
+            restore.mutate({ fileId, version: version.version });
+          }}
         />
       )}
     </>
