@@ -7,6 +7,7 @@ import { RuleTitle } from "../components/ui/RuleTitle";
 import { useUploadFiles } from "../hooks/files/useUploadFiles";
 import type { UploadItem } from "../hooks/files/useUploadFiles";
 import { useGoBack } from "../hooks/app/useGoBack";
+import { useSearchParams } from "react-router-dom";
 
 const STYLES: Record<UploadItem["status"], string> = {
   pending: "text-accent-dim",
@@ -27,7 +28,9 @@ function lineText({ status, path, error }: UploadItem): string {
 export default function UploadPage() {
   const { items, running, start } = useUploadFiles();
   const [files, setFiles] = useState<File[]>([]);
-  const [folder, setFolder] = useState("");
+  // The folder to start in comes from the address (/upload?folder=docs).
+  const [searchParams] = useSearchParams();
+  const [folder, setFolder] = useState(searchParams.get("folder") ?? "");
 
   const cancel = useGoBack();
 

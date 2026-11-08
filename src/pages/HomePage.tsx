@@ -84,7 +84,12 @@ export default function HomePage() {
           <Button onClick={openCreate} disabled={!data}>
             new dir
           </Button>
-          <Button onClick={() => navigate(ROUTES.upload)}>upload</Button>
+          <Button
+            onClick={() => data && navigate(routeTo.upload(data.path))}
+            disabled={!data}
+          >
+            upload
+          </Button>
           <Button onClick={() => refetch()}>refresh</Button>
         </div>
       </div>

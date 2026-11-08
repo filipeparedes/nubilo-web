@@ -16,4 +16,9 @@ export const routeTo = {
   folder: (folderId: number) => `/folders/${folderId}`,
   history: (fileId: number) => `/files/${fileId}/history`,
   compare: (fileId: number) => `/files/${fileId}/compare`,
+  // The upload page, starting in a folder. Without a folder it starts empty.
+  upload: (folder = "") =>
+    folder === ""
+      ? ROUTES.upload
+      : `${ROUTES.upload}?${new URLSearchParams({ folder })}`,
 };
