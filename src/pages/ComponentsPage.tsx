@@ -13,6 +13,8 @@ import type { Entry } from "../utils/entries";
 import { FileDropZone } from "../components/files/FileDropZone";
 import { FileExplorer } from "../components/files/FileExplorer";
 import { VersionTable } from "../components/files/VersionTable";
+import { DiffView } from "../components/files/DiffView";
+import { diffTexts } from "../utils/diff";
 
 interface Row {
   id: number;
@@ -71,6 +73,25 @@ const entries: Entry[] = [
     updatedAt: "2026-04-07 11:20:00",
   },
 ];
+
+const diffBefore = [
+  "# Notes",
+  "",
+  "First line stays.",
+  "This line is replaced.",
+  "This line is removed.",
+  "Last line stays.",
+].join("\n");
+
+const diffAfter = [
+  "# Notes",
+  "",
+  "First line stays.",
+  "This line replaced the old one.",
+  "A new line is added here.",
+  "And another one, with a very long text to see how it wraps inside the side of the comparison when it does not fit in one line.",
+  "Last line stays.",
+].join("\n");
 
 // Development-only sandbox: put components here to see how they look.
 export default function ComponentsPage() {
@@ -153,6 +174,13 @@ export default function ComponentsPage() {
           },
         ]}
       />
+
+      <DiffView
+        rows={diffTexts(diffBefore, diffAfter) ?? []}
+        leftLabel="v1"
+        rightLabel="v2"
+      />
+      <DiffView rows={[]} leftLabel="v1" rightLabel="v2" />
     </main>
   );
 }

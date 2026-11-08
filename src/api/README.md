@@ -4,17 +4,17 @@ The layer that talks to the Nubilo backend. Pages and hooks never call `fetch` d
 
 ## Structure
 
-| File                   | Role                                                                                                                                                                                                                        |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config.ts`            | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                                                                                                 |
-| `endpoints.ts`         | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand.                                                                                                                                      |
-| `client.ts`            | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected. |
-| `errorMessage.ts`      | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                        |
-| `resources/auth.ts`    | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                 |
-| `resources/health.ts`  | The health check: `getHealth`.                                                                                                                                                                                              |
-| `resources/files.ts`   | The file calls: `uploadFile`, `downloadFile`, `deleteFile`, `getVersions` (the history of a file), `downloadVersion` and `restoreVersion`.                                                                                  |
-| `resources/folders.ts` | The folders: the contents of the root (`getRootContents`) and of a folder (`getFolderContents`), the list of every folder (`getFolders`), `createFolder` and `deleteFolder`.                                                |
-| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo`, `FolderContents` (which also carries the `path` of the folder that was listed), `VersionInfo` and `FileVersions` (the path of a file and its versions).     |
+| File                   | Role                                                                                                                                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `config.ts`            | Loads `public/config.json` once at startup (`loadConfig()`) and exposes it through `getConfig()`. It holds the API address.                                                                                                    |
+| `endpoints.ts`         | Every backend path in one place (`ENDPOINTS`), so API calls never write paths by hand.                                                                                                                                         |
+| `client.ts`            | The JSON client. `request()` makes a call to the backend, `ApiError` is what it throws, `getToken()` / `setToken()` manage the session token and `setUnauthorizedHandler()` lets the app know when the session is rejected.    |
+| `errorMessage.ts`      | Turns a failed call into a message for the user (`CODE :: message`).                                                                                                                                                           |
+| `resources/auth.ts`    | The authentication calls: `register`, `login` and `logout`.                                                                                                                                                                    |
+| `resources/health.ts`  | The health check: `getHealth`.                                                                                                                                                                                                 |
+| `resources/files.ts`   | The file calls: `uploadFile`, `downloadFile`, `deleteFile`, `getVersions` (the history of a file), `downloadVersion`, `restoreVersion` and `compareVersions` (the chunk-level summary of the difference between two versions). |
+| `resources/folders.ts` | The folders: the contents of the root (`getRootContents`) and of a folder (`getFolderContents`), the list of every folder (`getFolders`), `createFolder` and `deleteFolder`.                                                   |
+| `types.ts`             | The shapes of what the backend sends: `FileInfo`, `FolderInfo`, `FolderContents` (which also carries the `path` of the folder that was listed), `VersionInfo` and `FileVersions` (the path of a file and its versions).        |
 
 ## How it works
 

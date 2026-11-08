@@ -12,6 +12,11 @@ interface VersionTableProps {
   // Called with the version when its restore button is pressed. The current
   // version has no restore button.
   onRestore?: (version: VersionInfo) => void;
+  // The numbers of the versions that are picked, and the function called
+  // when the box of a version is clicked. With onToggleSelect every row has a
+  // box to pick it, such as to compare two versions.
+  selected?: number[];
+  onToggleSelect?: (version: VersionInfo) => void;
 }
 
 // The current version is marked, so the user can tell it from the old ones.
@@ -21,9 +26,30 @@ function columns(
   {
     onDownload,
     onRestore,
-  }: Pick<VersionTableProps, "onDownload" | "onRestore">,
+    selected = [],
+    onToggleSelect,
+  }: Omit<VersionTableProps, "versions">,
 ): Column<VersionInfo>[] {
+  const pick: Column<VersionInfo>[] = onToggleSelect
+    ? [
+        {
+          header: "SEL",
+          width: "60px",
+          render: (version) => (
+            <input
+              type="checkbox"
+              className="terminal-check"
+              checked={selected.includes(version.version)}
+              onChange={() => onToggleSelect(version)}
+              aria-label={`Pick v${version.version}`}
+            />
+          ),
+        },
+      ]
+    : [];
+
   const base: Column<VersionInfo>[] = [
+    ...pick,
     {
       header: "VERSION",
       width: "150px",
@@ -79,13 +105,20 @@ export function VersionTable({
   versions,
   onDownload,
   onRestore,
+  selected,
+  onToggleSelect,
 }: VersionTableProps) {
   const current = Math.max(...versions.map((version) => version.version));
 
   return (
     <DataTable
       label="Versions"
-      columns={columns(current, { onDownload, onRestore })}
+      columns={columns(current, {
+        onDownload,
+        onRestore,
+        selected,
+        onToggleSelect,
+      })}
       rows={versions}
       getKey={(version) => version.version}
       empty={<EmptyState message="This file has no versions." />}
