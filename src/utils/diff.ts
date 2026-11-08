@@ -80,3 +80,10 @@ export function diffTexts(before: string, after: string): DiffRow[] | null {
   flush();
   return rows;
 }
+
+// What comparing two versions of a file gives: the rows of the comparison,
+// or the reason why there are none.
+export type VersionDiff =
+  | { kind: "text"; rows: DiffRow[] }
+  | { kind: "unsupported" }
+  | { kind: "tooLarge" };
