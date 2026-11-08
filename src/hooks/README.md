@@ -28,6 +28,7 @@ The custom hooks of the app. Hooks that read data from the server use TanStack Q
 | `useDownloadVersion.ts` | Downloads one version of a file and saves it with the version in the name, for example `notes-v2.txt`.                                            |
 | `useDeleteFile.ts`      | Deletes a file with all its versions. When it succeeds it refreshes every listing.                                                                |
 | `useFileVersions.ts`    | The history of a file: its path and its versions, newest first. Its query key starts with "versions", so the restore of a version can refresh it. |
+| `useRestoreVersion.ts`  | Restores an old version of a file by adding a new version with its content. When it succeeds the history and the listings are refreshed.          |
 
 ### folders/
 

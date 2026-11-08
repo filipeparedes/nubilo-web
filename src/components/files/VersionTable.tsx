@@ -7,15 +7,21 @@ import { EmptyState } from "../ui/EmptyState";
 
 interface VersionTableProps {
   versions: VersionInfo[];
-  // Called with the version when its get button is pressed. Without it the
-  // table has no actions column.
+  // Called with the version when its get button is pressed.
   onDownload?: (version: VersionInfo) => void;
+  // Called with the version when its restore button is pressed. The current
+  // version has no restore button.
+  onRestore?: (version: VersionInfo) => void;
 }
 
 // The current version is marked, so the user can tell it from the old ones.
+// Without any callback the table has no actions column.
 function columns(
   currentVersion: number,
-  onDownload?: (version: VersionInfo) => void,
+  {
+    onDownload,
+    onRestore,
+  }: Pick<VersionTableProps, "onDownload" | "onRestore">,
 ): Column<VersionInfo>[] {
   const base: Column<VersionInfo>[] = [
     {
@@ -47,14 +53,21 @@ function columns(
     },
   ];
 
-  if (!onDownload) return base;
+  if (!onDownload && !onRestore) return base;
   return [
     ...base,
     {
       header: "ACTIONS",
-      width: "120px",
+      width: "200px",
       render: (version) => (
-        <Button onClick={() => onDownload(version)}>get</Button>
+        <span className="flex gap-4">
+          {onDownload && (
+            <Button onClick={() => onDownload(version)}>get</Button>
+          )}
+          {onRestore && version.version !== currentVersion && (
+            <Button onClick={() => onRestore(version)}>restore</Button>
+          )}
+        </span>
       ),
     },
   ];
@@ -62,13 +75,17 @@ function columns(
 
 // The history of a file: one row per version, as the backend sends them,
 // newest first. The highest version number is the current one.
-export function VersionTable({ versions, onDownload }: VersionTableProps) {
+export function VersionTable({
+  versions,
+  onDownload,
+  onRestore,
+}: VersionTableProps) {
   const current = Math.max(...versions.map((version) => version.version));
 
   return (
     <DataTable
       label="Versions"
-      columns={columns(current, onDownload)}
+      columns={columns(current, { onDownload, onRestore })}
       rows={versions}
       getKey={(version) => version.version}
       empty={<EmptyState message="This file has no versions." />}
