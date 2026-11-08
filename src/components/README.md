@@ -32,6 +32,7 @@ The reusable pieces of the interface. They take their look and behavior from pro
 | `VersionTable.tsx` | The history of a file, built on `DataTable`: one row per version, with the current one marked. With `onDownload` and `onRestore` each version gets its get and restore buttons, and the current version has no restore.                                   |
 | `FileExplorer.tsx` | The tree of all the folders for the side panel. Folders start closed, except the ones that hold the current folder, and an arrow opens or closes each one. It loads nothing: it gets the folders by prop.                                                 |
 | `FileDropZone.tsx` | A box to drop files on, or click to browse. It lists the chosen files and does not upload anything.                                                                                                                                                       |
+| `DiffView.tsx`     | Two versions of a text side by side, line by line, with the lines numbered, the removed ones in red on the left and the added ones in green on the right. It receives the rows already lined up (`DiffRow[]`) and only draws them. |
 
 ## How it works
 
